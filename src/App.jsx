@@ -33,10 +33,8 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V41 (Compact Branding Build)
+ * AWC Air Duct and Window Cleaning - Production V51 (Video Hero Build)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Typography: Archivo (Headings) / Figtree (UI & Body)
- * Features: Compact Hero Section, Centered Hero Branding, Smooth Scroll
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -52,7 +50,7 @@ const SocialSVG = {
 // --- IMAGE MAP ---
 const IMAGE_MAP = {
   LOGO: "AWC-red-logo-2x3[35897]_pdf.avif",
-  HERO_MAIN: "office_depot_window_cleaning.avif",
+  HERO_VIDEO: "hero_video.mp4",
   FAMILY: "awc_family.avif",
   TEAM: "awc_team.avif",
   VAN: "awc_van.avif",
@@ -69,7 +67,14 @@ const IMAGE_MAP = {
   SERVICE_9_LIGHT: "service_light_fixture.avif",
   SERVICE_10_MIRROR: "service_mirror_cleaning.avif",
   SERVICE_11_ROOF: "service_roof_softwash.avif",
-  SERVICE_12_FOGGING: "service_fogging_sanitization.avif"
+  SERVICE_12_FOGGING: "service_fogging_sanitization.avif",
+  WINDOW_LADDER: "window_cleaning_ladder.avif",
+  GUTTER_1: "gutter_cleaning_1.avif",
+  GUTTER_2: "gutter_cleaning_2.avif",
+  SOLAR_1: "solar_panel_cleaning.avif",
+  DECK_1: "deck_cleaning.avif",
+  HOUSE_1: "house_washing.avif",
+  HOUSE_2: "house_washing_2.avif"
 };
 
 // --- FLOATING LOWER-LEFT SOCIAL BAR ---
@@ -136,18 +141,176 @@ export default function App() {
   ], []);
 
   const services = useMemo(() => [
-    { id: 1, title: "Air Duct Cleaning", icon: Fan, img: IMAGE_MAP.SERVICE_1_DUCT, desc: "Professional high-static ventilation sanitization for your residential or commercial property." },
-    { id: 2, title: "Window Cleaning", icon: Building2, img: IMAGE_MAP.SERVICE_2_WINDOW, desc: "Interior and exterior window cleaning for storefronts, residential estates, and skyscrapers." },
-    { id: 3, title: "Pressure Washing", icon: Waves, img: IMAGE_MAP.SERVICE_3_PRESSURE, desc: "Precision surface restoration for driveways, siding, and building perimeters." },
-    { id: 4, title: "Gutter Cleaning", icon: Droplets, img: IMAGE_MAP.SERVICE_4_GUTTER, desc: "Debris removal and system flushing to protect property foundations and roofs." },
-    { id: 5, title: "Dryer Vent Cleaning", icon: Wind, img: IMAGE_MAP.SERVICE_5_DRYER, desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention." },
-    { id: 6, title: "Solar Panel Cleaning", icon: Sun, img: IMAGE_MAP.SERVICE_6_SOLAR, desc: "Purified water cleaning for peak electrical efficiency of your solar arrays." },
-    { id: 7, title: "Deck Cleaning & Restoration", icon: LucideLayout, img: IMAGE_MAP.SERVICE_7_DECK, desc: "Deep wood cleaning and restoration to enhance outdoor longevity." },
-    { id: 8, title: "House & Building Washing", icon: Building2, img: IMAGE_MAP.SERVICE_8_HOUSE, desc: "Comprehensive exterior washing from soft-wash to high-pressure." },
-    { id: 9, title: "Light Fixture Cleaning", icon: Zap, img: IMAGE_MAP.SERVICE_9_LIGHT, desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures." },
-    { id: 10, title: "Mirror Cleaning", icon: Star, img: IMAGE_MAP.SERVICE_10_MIRROR, desc: "Streak-free polishing for gym mirrors and custom residential glass." },
-    { id: 11, title: "Soft Washing & Roof Washing", icon: Droplets, img: IMAGE_MAP.SERVICE_11_ROOF, desc: "Safe, low-pressure chemical cleaning for roof algae and moss." },
-    { id: 12, title: "Fogging Service", icon: Wind, img: IMAGE_MAP.SERVICE_12_FOGGING, desc: "Industrial sanitization fogging for complete interior environment purification." }
+    { 
+      id: 1, 
+      title: "Air Duct Cleaning", 
+      icon: Fan, 
+      img: IMAGE_MAP.SERVICE_1_DUCT, 
+      desc: "Professional high-static ventilation sanitization for your residential or commercial property.",
+      videoUrl: "https://www.youtube.com/embed/_FHWKTUiykM",
+      longDesc: [
+        "According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit. It is a common source of respiratory diseases, including asthma, allergies, and lung cancer. It can be worse in winter, when windows are shut tight and less fresh air can circulate.”",
+        "Clean ducts help your heating and air conditioning system run more efficiently and reduce harmful allergens in your home. With clean air ducts, not only will you breathe easier, but you’ll sleep better too."
+      ]
+    },
+    { 
+      id: 2, 
+      title: "Window Cleaning", 
+      icon: Building2, 
+      img: IMAGE_MAP.SERVICE_2_WINDOW, 
+      desc: "Interior and exterior window cleaning for storefronts, residential estates, and skyscrapers.",
+      localVideo: "window_cleaning.mp4",
+      extraImages: [IMAGE_MAP.WINDOW_LADDER],
+      longDesc: [
+        "When was the last time you had your windows professionally cleaned? Regular maintenance cleaning can prevent mold, mildew, and possible oxidation from sprinklers and screens that could cause permanent stains. Our technicians can recommend ways to help prevent these problems in the future.",
+        "We offer commercial and residential window cleaning to enhance your view and brighten your home or office. We clean your windows, outsides only OR inside and out, including screens, sills and tracks. Don’t forget your skylights! While inside your home or office, a great deal of care is exercised when we perform our services. We use drop cloths and shoe covers to keep your floors and personal belongings clean.",
+        "Protect your investment by keeping your windows clean on a regular basis. Ask us about signing on to a frequency program to save money. Clean windows will clearly brighten up your day!",
+        "**What is a water fed pole?** Poles that go up to 60 feet can reach and clean high windows while our technicians remain safe on the ground. There are no squeegees involved because the water that goes through the pole is filtered and will dry spot-free on your glass.",
+        "• Skylight cleaning interior or exterior also available.",
+        "• We can safely clean extra tall windows with specialized equipment and reach places others can’t.",
+        "• Using squeegees and strip washers on French cut window panes."
+      ]
+    },
+    { 
+      id: 3, 
+      title: "Pressure Washing", 
+      icon: Waves, 
+      img: IMAGE_MAP.SERVICE_3_PRESSURE, 
+      desc: "Precision surface restoration for driveways, siding, and building perimeters.",
+      localVideo: "pressure_cleaning.mp4",
+      longDesc: [
+        "Add value and life to your investment with AWC’s pressure washing services. We can help you:",
+        "**SAVE MONEY.**",
+        "Extend the life of your paint on your house and decks by pressure washing.",
+        "**STAY SAFE.**",
+        "Remove dangerous and slippery mold, mildew, stains, and dirt easily to ensure the safety of your family, friends, and pets.",
+        "**GAIN CURBSIDE LUSTER AND BACKYARD APPEAL.**",
+        "Bring sidewalks, driveways, decks, patios, and patio furniture back to life. Sanding and sealing of decks are services we can also provide.",
+        "**LOVE YOUR HOME.**",
+        "See the “before and after” difference that we’re sure you’ll love.",
+        "For a bigger impact, have your windows cleaned after pressure washing!"
+      ]
+    },
+    { 
+      id: 4, 
+      title: "Gutter Cleaning", 
+      icon: Droplets, 
+      img: IMAGE_MAP.SERVICE_4_GUTTER, 
+      desc: "Debris removal and system flushing to protect property foundations and roofs.",
+      extraImages: [IMAGE_MAP.GUTTER_1, IMAGE_MAP.GUTTER_2],
+      longDesc: [
+        "Prevent water damage and protect your home's foundation with AWC's professional gutter cleaning services. Clogged gutters can lead to wood rot, mold growth, and expensive structural repairs.",
+        "**DEBRIS REMOVAL.**",
+        "Our team meticulously removes leaves, silt, and obstacles by hand and with specialized high-reach vacuum systems to ensure your gutters are entirely clear.",
+        "**SYSTEM FLUSHING.**",
+        "We flush your entire system to verify that downspouts are flowing freely and directing water away from your property as designed.",
+        "**SAFETY FIRST.**",
+        "Using professional-grade ladders with protective stand-offs, we reach even the most difficult gutter lines without damaging your shingles or siding.",
+        "Regular maintenance is the key to longevity. Ask about our seasonal cleaning programs to keep your home protected year-round."
+      ]
+    },
+    { 
+      id: 5, 
+      title: "Dryer Vent Cleaning", 
+      icon: Wind, 
+      img: IMAGE_MAP.SERVICE_5_DRYER, 
+      desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention.",
+      videoUrl: "https://www.youtube.com/embed/iuUXuGMimYo",
+      longDesc: [
+        "We can help increase the efficiency of your clothes dryer and prevent possible hazardous internal fires in your dryer with air duct cleaning of your dryer vents. Ask us about special pricing of this service."
+      ]
+    },
+    { 
+      id: 6, 
+      title: "Solar Panel Cleaning", 
+      icon: Sun, 
+      img: IMAGE_MAP.SERVICE_6_SOLAR, 
+      desc: "Purified water cleaning for peak electrical efficiency of your solar arrays.",
+      extraImages: [IMAGE_MAP.SOLAR_1],
+      longDesc: [
+        "Dirt, dust, pollen, grime, and bird droppings can affect the output of your solar panels by 20 percent. How often should you clean these depends on what angle they are sloped on and how much rainfall you get.",
+        "We can get them back to maximum output for you with the safe use of our **water fed pole** system."
+      ]
+    },
+    { 
+      id: 7, 
+      title: "Deck Cleaning & Restoration", 
+      icon: LucideLayout, 
+      img: IMAGE_MAP.SERVICE_7_DECK, 
+      desc: "Deep wood cleaning and restoration to enhance outdoor longevity.",
+      extraImages: [IMAGE_MAP.DECK_1],
+      longDesc: [
+        "Clean your deck and handrails to get the wood back to looking new again! Depending on the job, we will use a pressure washer to get the debris off your deck or use the **Soft Wash method**.",
+        "Either way, after the cleaning process is complete, we also offer an additional service of sanding and sealing your deck and rails."
+      ]
+    },
+    { 
+      id: 8, 
+      title: "House & Building Washing", 
+      icon: Building2, 
+      img: IMAGE_MAP.SERVICE_8_HOUSE, 
+      desc: "Comprehensive exterior washing from soft-wash to high-pressure.",
+      extraImages: [IMAGE_MAP.HOUSE_1, IMAGE_MAP.HOUSE_2],
+      longDesc: [
+        "Gain curbside appeal and save money on painting your entire house by having it washed by one of our experts. We use two different methods of washing.",
+        "We can pressure wash the house or use the **Soft Wash method**. Either one will bring the exterior of your home or business back to life!",
+        "See what a difference pressure washing can make and improve your curb appeal."
+      ]
+    },
+    { 
+      id: 9, 
+      title: "Light Fixture Cleaning", 
+      icon: Zap, 
+      img: IMAGE_MAP.SERVICE_9_LIGHT, 
+      desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures.",
+      extraImages: [IMAGE_MAP.SERVICE_9_LIGHT],
+      longDesc: [
+        "Whether it’s indoor or outdoor, an intricate chandelier or a basic light fixture let AWC get it nice and sparkly for you!"
+      ]
+    },
+    { 
+      id: 10, 
+      title: "Mirror Cleaning", 
+      icon: Star, 
+      img: IMAGE_MAP.SERVICE_10_MIRROR, 
+      desc: "Streak-free polishing for gym mirrors and custom residential glass.",
+      extraImages: [IMAGE_MAP.LOGO], // Reverting to Logo or relevant image as previous hero image is gone
+      longDesc: [
+        "Bathrooms, closet doors, or mirrors that hang on your wall. Get the haze and peanut butter finger prints off them so you can see that beautiful face of yours nice and clear!"
+      ]
+    },
+    { 
+      id: 11, 
+      title: "Soft Washing & Roof Washing", 
+      icon: Droplets, 
+      img: IMAGE_MAP.SERVICE_11_ROOF, 
+      desc: "Safe, low-pressure chemical cleaning for roof algae and moss.",
+      localVideo: "soft_washing.mp4",
+      longDesc: [
+        "Don’t let dirt and grime stick to the exterior of your property. While pressure washing is ideal for dramatic results on concrete, brick, and other hard surfaces with tough, aged stains, soft washing is perfect for gentle cleaning that avoids potential damage to exteriors.",
+        "Freshen up the look of your building and remove potentially hazardous organic growth with a soft wash treatment.",
+        "**THE METHOD.**",
+        "Soft wash is a new cleaning method created to cleanse delicate outdoor surfaces. It’s been popular on the East Coast and in the United Kingdom due to its long-lasting cleaning power.",
+        "Not all surfaces can survive a powerful pressure wash, including shingle roofs and ornamental trellis. Soft washing doesn’t depend on force to lift dirt. Instead, it uses a controlled application of water mixed with cleaning solution to create a deep clean.",
+        "**PROTECTION.**",
+        "The cleaning solution used in soft washing targets organic growth like moss, mold, mildew, and lichen. It kills the surface buildup of fungi while also killing the root of the organism. Soft wash eliminates the spores embedded inside an exterior surface, preventing regrowth and keeping surfaces cleaner longer.",
+        "Dirt and potential allergen-causing growth will be gone. Throw a backyard party or read a book on the patio without worrying over what’s lurking on the building’s exterior."
+      ]
+    },
+    { 
+      id: 12, 
+      title: "Fogging Service", 
+      icon: Wind, 
+      img: IMAGE_MAP.SERVICE_12_FOGGING, 
+      desc: "Industrial sanitization fogging for complete interior environment purification.",
+      videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU",
+      longDesc: [
+        "For businesses and residences, we use the same equipment that is used by the US Military, hospitals, and the airline industry.",
+        "Applying a fog spray to an entire area within a matter of minutes can help reduce the risk of spread of viruses and germs. The product we use is on the EPA’s list of known solutions to use to effectively treat COVID-19. We can use these anti-microbial foggers just about anywhere from classrooms to your home office.",
+        "**NOTE.**",
+        "While this is not a foolproof solution to sanitizing your establishment, it is an approved method that can help your home or business. We do not guarantee that your environment will be 100% free of viruses, bacteria or mold after service is complete. However, we can be sure to work with our equipment and sanitizers to their maximum capabilities, ensuring your space is safer and cleaner than before AWC serviced it."
+      ]
+    }
   ], []);
 
   return (
@@ -160,7 +323,6 @@ export default function App() {
       {/* FIXED NAVIGATION */}
       <header className="bg-white/95 backdrop-blur-xl border-b border-slate-100 fixed top-0 left-0 right-0 z-[60] shadow-sm transition-all duration-300">
         <div className="max-w-[1600px] mx-auto px-10 py-4 flex justify-between items-center">
-          {/* LOGO CONTAINER: Set to top-[68%] to ensure it sits perfectly balanced over the header background */}
           <div className="relative w-48 h-16 flex items-center">
              <img 
                src={`/images/${IMAGE_MAP.LOGO}`} 
@@ -197,20 +359,23 @@ export default function App() {
       {/* MAIN CONTENT */}
       <main className="pt-28">
         
-        {/* HERO SECTION - REFINED COMPACT BRANDING & CENTERED ARCHITECTURE */}
+        {/* HERO SECTION - VIDEO BACKGROUND */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
-            <img 
-              src={`/images/${IMAGE_MAP.HERO_MAIN}`} 
-              alt="AWC Excellence" 
-              className="w-full h-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-105"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
+            {/* HERO VIDEO IMPLEMENTATION */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
+            >
+              <source src={`/images/${IMAGE_MAP.HERO_VIDEO}`} type="video/mp4" />
+            </video>
             <div className="absolute inset-0 bg-slate-950/30"></div>
           </div>
 
           <div className="relative z-20 max-w-7xl mx-auto w-full py-8 text-center reveal">
-            {/* HERO LOGO: Resized (h-64) and moved up slightly for better section fit */}
             <div className="mb-6 flex flex-col items-center">
                <img 
                  src={`/images/${IMAGE_MAP.LOGO}`} 
@@ -272,9 +437,6 @@ export default function App() {
                       onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800'; }} 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute top-6 right-6 text-white/30 font-heading font-black text-2xl select-none">
-                       {String(s.id).padStart(2, '0')}
-                    </div>
                     <div className="absolute inset-0 p-8 flex flex-col justify-end text-left translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                       <div className="w-10 h-10 bg-white/10 backdrop-blur-lg border border-white/20 flex items-center justify-center rounded-full text-white mb-4 group-hover:bg-[#CC0000] transition-colors">
                         <s.icon size={18} />
@@ -301,7 +463,7 @@ export default function App() {
                      <div className="absolute -inset-6 border-[12px] border-white -z-10 rotate-[-1deg] shadow-sm"></div>
                      <img 
                       src={`/images/${IMAGE_MAP.FAMILY}`} 
-                      className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 grayscale-0 transition-all duration-1000" 
+                      className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" 
                       alt="The Frediani Family" 
                       onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }}
                      />
@@ -421,12 +583,11 @@ export default function App() {
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                  <div className="relative group reveal">
-                    {/* FULL COLOR MAP - NO OVERLAYS */}
                     <img 
                       src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} 
                       alt="AWC Service Areas Map" 
                       className="w-full h-auto shadow-2xl border border-white/10 rounded-sm relative z-10" 
-                      onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200'; }} 
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }} 
                     />
                  </div>
 
@@ -496,21 +657,81 @@ export default function App() {
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setSelectedService(null)}></div>
           <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in fade-in zoom-in duration-500">
-            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)}><X size={40} strokeWidth={1} /></button>
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="bg-slate-950 flex items-center justify-center border-r border-slate-100 min-h-[450px] relative overflow-hidden group/vid">
-                 <LucideHistory size={300} className="text-white/5 absolute -right-10 -bottom-10 rotate-12" />
-                 <div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em] group-hover/vid:tracking-[1.5em] transition-all duration-700">AWC TECHNICAL</div>
-              </div>
-              <div className="p-12 md:p-24 bg-white text-left">
-                <div className="flex items-center space-x-10 mb-12">
+            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-20 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)}><X size={40} strokeWidth={1} /></button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-start h-full">
+              {/* CONTENT PANEL (LEFT) */}
+              <div className="p-12 md:p-24 bg-white text-left order-2 lg:order-1 flex flex-col justify-center min-h-full">
+                <div className="flex items-center space-x-10 mb-10">
                   <div className="text-[#CC0000]"><selectedService.icon size={40} strokeWidth={1.5} /></div>
                   <div className="h-px w-16 bg-slate-100"></div>
-                  <span className="text-[11px] uppercase tracking-[0.6em] font-black text-slate-300 italic">Profile {selectedService.id}</span>
                 </div>
-                <h3 className="text-4xl md:text-6xl font-heading font-black mb-8 tracking-tighter text-slate-950 uppercase leading-none">{selectedService.title}</h3>
-                <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed mb-16 italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
+                
+                <h3 className="text-4xl md:text-5xl font-heading font-black mb-10 tracking-tighter text-slate-950 uppercase leading-none">{selectedService.title}</h3>
+                
+                <div className="space-y-6 mb-12">
+                   {selectedService.longDesc ? (
+                     selectedService.longDesc.map((para, i) => (
+                       <p key={i} className={`text-lg leading-relaxed text-slate-600 font-sans ${para.startsWith('•') ? 'pl-4' : ''}`}>
+                         {para.includes('**') ? (
+                           <>
+                             {para.split('**')[0]}
+                             <strong className="text-slate-900">{para.split('**')[1]}</strong>
+                             {para.split('**')[2]}
+                           </>
+                         ) : para}
+                       </p>
+                     ))
+                   ) : (
+                     <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
+                   )}
+                </div>
+
                 <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl">Immediate Dispatch</button>
+              </div>
+
+              {/* VISUAL PANEL (VERTICALLY CENTERED ON RIGHT) */}
+              <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
+                 <div className="w-full max-w-4xl space-y-12">
+                    {selectedService.videoUrl ? (
+                      <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
+                        <iframe 
+                          width="100%" 
+                          height="100%" 
+                          src={selectedService.videoUrl} 
+                          title={selectedService.title}
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    ) : selectedService.localVideo ? (
+                      <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
+                         <video 
+                           src={`/images/${selectedService.localVideo}`} 
+                           controls 
+                           className="w-full h-full object-cover"
+                         />
+                      </div>
+                    ) : null}
+
+                    {/* Support for one or multiple extra images */}
+                    {selectedService.extraImages && selectedService.extraImages.map((img, i) => (
+                      <div key={i} className="w-full flex flex-col items-center">
+                         <img 
+                           src={`/images/${img}`} 
+                           alt={`${selectedService.title} Detail ${i + 1}`} 
+                           className="w-full h-auto rounded-sm shadow-2xl border border-white/5" 
+                         />
+                      </div>
+                    ))}
+                    
+                    {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && (
+                      <div className="flex flex-col items-center text-center">
+                        <LucideHistory size={300} className="text-white/5 mb-8" />
+                        <div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em] group-hover/vid:tracking-[1.5em] transition-all duration-700">AWC TECHNICAL LOG</div>
+                      </div>
+                    )}
+                 </div>
               </div>
             </div>
           </div>
