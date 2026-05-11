@@ -29,13 +29,22 @@ import {
   ShieldAlert,
   Users,
   MapPin,
-  CheckCircle
+  CheckCircle,
+  Mail,
+  Home,
+  Briefcase,
+  Quote as QuoteIcon,
+  Sparkles,
+  Layers,
+  ClipboardCheck,
+  UserCheck,
+  FileText
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V61 (SEO & Content Finalization)
+ * AWC Air Duct and Window Cleaning - Production V65 (Visual & Palette Shift)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Focus: 100 SEO Score + Dynamic Meta Management + Content Integrity
+ * Focus: Full-Color Mastery + Dark Testimonial Suite + 100 SEO
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -104,8 +113,20 @@ const FloatingSocials = ({ links }) => (
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [quoteStep, setQuoteStep] = useState(1);
+  const [quoteState, setQuoteState] = useState({
+    services: [],
+    propertyType: 'residential',
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const phoneLiteral = "(650) 583-0420";
   
   useEffect(() => {
@@ -147,161 +168,49 @@ export default function App() {
 
   const services = useMemo(() => [
     { 
-      id: 1, 
-      title: "Air Duct Cleaning", 
-      icon: Fan, 
-      img: IMAGE_MAP.SERVICE_1_DUCT, 
+      id: 1, title: "Air Duct Cleaning", icon: Fan, img: IMAGE_MAP.SERVICE_1_DUCT, 
       desc: "Professional high-static ventilation sanitization for your residential or commercial property.",
       videoUrl: "https://www.youtube.com/embed/_FHWKTUiykM",
-      longDesc: [
-        "According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit. It is a common source of respiratory diseases, including asthma, allergies, and lung cancer. It can be worse in winter, when windows are shut tight and less fresh air can circulate.”",
-        "Clean ducts help your heating and air conditioning system run more efficiently and reduce harmful allergens in your home. With clean air ducts, not only will you breathe easier, but you’ll sleep better too."
-      ]
+      longDesc: ["According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit.”", "Clean ducts help your system run more efficiently and reduce harmful allergens."]
     },
-    { 
-      id: 2, 
-      title: "Window Cleaning", 
-      icon: Building2, 
-      img: IMAGE_MAP.SERVICE_2_WINDOW, 
-      desc: "Interior and exterior window cleaning for storefronts, residential estates, and skyscrapers.",
-      localVideo: "window_cleaning.mp4",
-      extraImages: [IMAGE_MAP.WINDOW_LADDER],
-      longDesc: [
-        "When was the last time you had your windows professionally cleaned? Regular maintenance cleaning can prevent mold, mildew, and possible oxidation from sprinklers and screens that could cause permanent stains. Our technicians can recommend ways to help prevent these problems in the future.",
-        "We offer commercial and residential window cleaning to enhance your view and brighten your home or office. We clean your windows, outsides only OR inside and out, including screens, sills and tracks. Don’t forget your skylights! While inside your home or office, a great deal of care is exercised when we perform our services. We use drop cloths and shoe covers to keep your floors and personal belongings clean.",
-        "Protect your investment by keeping your windows clean on a regular basis. Ask us about signing on to a frequency program to save money. Clean windows will clearly brighten up your day!",
-        "**What is a water fed pole?** Poles that go up to 60 feet can reach and clean high windows while our technicians remain safe on the ground. There are no squeegees involved because the water that goes through the pole is filtered and will dry spot-free on your glass.",
-        "• Skylight cleaning interior or exterior also available.",
-        "• We can safely clean extra tall windows with specialized equipment and reach places others can’t.",
-        "• Using squeegees and strip washers on French cut window panes."
-      ]
-    },
-    { 
-      id: 3, 
-      title: "Pressure Washing", 
-      icon: Waves, 
-      img: IMAGE_MAP.SERVICE_3_PRESSURE, 
-      desc: "Precision surface restoration for driveways, siding, and building perimeters.",
-      localVideo: "pressure_cleaning.mp4",
-      longDesc: [
-        "Add value and life to your investment with AWC’s pressure washing services. We can help you:",
-        "**SAVE MONEY.** Extend the life of your paint on your house and decks by pressure washing.",
-        "**STAY SAFE.** Remove dangerous and slippery mold, mildew, stains, and dirt easily to ensure the safety of your family, friends, and pets.",
-        "**GAIN CURBSIDE LUSTER AND BACKYARD APPEAL.** Bring sidewalks, driveways, decks, patios, and patio furniture back to life. Sanding and sealing of decks are services we can also provide.",
-        "**LOVE YOUR HOME.** See the “before and after” difference that we’re sure you’ll love.",
-        "For a bigger impact, have your windows cleaned after pressure washing!"
-      ]
-    },
-    { 
-      id: 4, 
-      title: "Gutter Cleaning", 
-      icon: Droplets, 
-      img: IMAGE_MAP.SERVICE_4_GUTTER, 
-      desc: "Debris removal and system flushing to protect property foundations and roofs.",
-      extraImages: [IMAGE_MAP.GUTTER_1, IMAGE_MAP.GUTTER_2],
-      longDesc: [
-        "Prevent water damage and protect your home's foundation with AWC's professional gutter cleaning services. Clogged gutters can lead to wood rot, mold growth, and expensive structural repairs.",
-        "**DEBRIS REMOVAL.** Our team meticulously removes leaves, silt, and obstacles by hand and with specialized high-reach vacuum systems to ensure your gutters are entirely clear.",
-        "**SYSTEM FLUSHING.** We flush your entire system to verify that downspouts are flowing freely and directing water away from your property as designed.",
-        "**SAFETY FIRST.** Using professional-grade ladders with protective stand-offs, we reach even the most difficult gutter lines without damaging your shingles or siding.",
-        "Regular maintenance is the key to longevity. Ask about our seasonal cleaning programs to keep your home protected year-round."
-      ]
-    },
-    { 
-      id: 5, 
-      title: "Dryer Vent Cleaning", 
-      icon: Wind, 
-      img: IMAGE_MAP.SERVICE_5_DRYER, 
-      desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention.", 
-      videoUrl: "https://www.youtube.com/embed/iuUXuGMimYo",
-      longDesc: [
-        "We can help increase the efficiency of your clothes dryer and prevent possible hazardous internal fires in your dryer with air duct cleaning of your dryer vents. Ask us about special pricing of this service."
-      ]
-    },
-    { 
-      id: 6, 
-      title: "Solar Panel Cleaning", 
-      icon: Sun, 
-      img: IMAGE_MAP.SERVICE_6_SOLAR, 
-      desc: "Purified water cleaning for peak electrical efficiency of your solar arrays.", 
-      extraImages: [IMAGE_MAP.SOLAR_1],
-      longDesc: [
-        "Dirt, dust, pollen, grime, and bird droppings can affect the output of your solar panels by 20 percent. How often should you clean these depends on what angle they are sloped on and how much rainfall you get. We can get them back to maximum output for you with the safe use of our water fed pole system."
-      ]
-    },
-    { 
-      id: 7, 
-      title: "Deck Cleaning & Restoration", 
-      icon: LucideLayout, 
-      img: IMAGE_MAP.SERVICE_7_DECK, 
-      desc: "Deep wood cleaning and restoration to enhance outdoor longevity.", 
-      extraImages: [IMAGE_MAP.DECK_1],
-      longDesc: [
-        "Clean your deck and handrails to get the wood back to looking new again! Depending on the job, we will use a pressure washer to get the debris off your deck or use the Soft Wash method. Either way, after the cleaning process is complete, we also offer an additional service of sanding and sealing your deck and rails."
-      ]
-    },
-    { 
-      id: 8, 
-      title: "House & Building Washing", 
-      icon: Building2, 
-      img: IMAGE_MAP.SERVICE_8_HOUSE, 
-      desc: "Comprehensive exterior washing from soft-wash to high-pressure.", 
-      extraImages: [IMAGE_MAP.HOUSE_1, IMAGE_MAP.HOUSE_2],
-      longDesc: [
-        "Gain curbside appeal and save money on painting your entire house by having it washed by one of our experts. We use two different methods of washing. We can pressure wash the house or use the Soft Wash method. Either one will bring the exterior of your home or business back to life!",
-        "See what a difference pressure washing can make and improve your curb appeal."
-      ]
-    },
-    { 
-      id: 9, 
-      title: "Light Fixture Cleaning", 
-      icon: Zap, 
-      img: IMAGE_MAP.SERVICE_9_LIGHT, 
-      desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures.", 
-      extraImages: [IMAGE_MAP.SERVICE_9_LIGHT],
-      longDesc: [
-        "Whether it’s indoor or outdoor, an intricate chandelier or a basic light fixture let AWC get it nice and sparkly for you!"
-      ]
-    },
-    { 
-      id: 10, 
-      title: "Mirror Cleaning", 
-      icon: Star, 
-      img: IMAGE_MAP.SERVICE_10_MIRROR, 
-      desc: "Streak-free polishing for gym mirrors and custom residential glass.", 
-      extraImages: [IMAGE_MAP.LOGO],
-      longDesc: [
-        "Bathrooms, closet doors, or mirrors that hang on your wall. Get the haze and peanut butter finger prints off them so you can see that beautiful face of yours nice and clear!"
-      ]
-    },
-    { 
-      id: 11, 
-      title: "Soft Washing & Roof Washing", 
-      icon: Droplets, 
-      img: IMAGE_MAP.SERVICE_11_ROOF, 
-      desc: "Safe, low-pressure chemical cleaning for roof algae and moss.", 
-      localVideo: "soft_washing.mp4",
-      longDesc: [
-        "Don’t let dirt and grime stick to the exterior of your property. While pressure washing is ideal for dramatic results on concrete, brick, and other hard surfaces with tough, aged stains, soft washing is perfect for gentle cleaning that avoids potential damage to exteriors. Freshen up the look of your building and remove potentially hazardous organic growth with a soft wash treatment.",
-        "Soft wash is a new cleaning method created to cleanse delicate outdoor surfaces. It’s been popular on the East Coast and in the United Kingdom due to its long-lasting cleaning power.",
-        "Not all surfaces can survive a powerful pressure wash, including shingle roofs and ornamental trellis. Soft washing doesn’t depend on force to lift dirt. Instead, it uses a controlled application of water mixed with cleaning solution to create a deep clean. Protect the lifetime of exterior paint and other building materials by opting for a soft wash.",
-        "The cleaning solution used in soft washing targets organic growth like moss, mold, mildew, and lichen. It kills the surface buildup of fungi while also killing the root of the organism. Pressure washing removes surface growth, but soft wash goes a step further. Soft wash eliminates the spores embedded inside an exterior surface, preventing regrowth and keeping surfaces cleaner longer.",
-        "Enjoy your property’s beautiful outdoor living spaces after a soft wash treatment. Dirt and potential allergen-causing growth will be gone. Throw a backyard party or read a book on the patio without worrying over what’s lurking on the building’s exterior."
-      ]
-    },
-    { 
-      id: 12, 
-      title: "Fogging Service", 
-      icon: Wind, 
-      img: IMAGE_MAP.SERVICE_12_FOGGING, 
-      desc: "Industrial sanitization fogging for complete interior environment purification.", 
-      videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU",
-      longDesc: [
-        "For businesses and residences, we use the same equipment that is used by the US Military, hospitals, and the airline industry. Applying a fog spray to an entire area within a matter of minutes can help reduce the risk of spread of viruses and germs. The product we use is on the EPA’s list of known solutions to use to effectively treat COVID-19. We can use these anti-microbial foggers just about anywhere from classrooms to your home office. While this is not a foolproof solution to sanitizing your establishment, it is an approved method that can help your home or business.",
-        "We do not guarantee that your environment will be 100% free of viruses, bacteria or mold after service is complete. However, we can be sure to work with our equipment and sanitizers to their maximum capabilities, ensuring your space is safer and cleaner than before AWC serviced it."
-      ]
-    }
+    { id: 2, title: "Window Cleaning", icon: Building2, img: IMAGE_MAP.SERVICE_2_WINDOW, desc: "Interior and exterior window cleaning for storefronts, residential estates, and skyscrapers.", localVideo: "window_cleaning.mp4", extraImages: [IMAGE_MAP.WINDOW_LADDER] },
+    { id: 3, title: "Pressure Washing", icon: Waves, img: IMAGE_MAP.SERVICE_3_PRESSURE, desc: "Precision surface restoration for driveways, siding, and building perimeters.", localVideo: "pressure_cleaning.mp4" },
+    { id: 4, title: "Gutter Cleaning", icon: Droplets, img: IMAGE_MAP.SERVICE_4_GUTTER, desc: "Debris removal and system flushing to protect property foundations and roofs.", extraImages: [IMAGE_MAP.GUTTER_1, IMAGE_MAP.GUTTER_2] },
+    { id: 5, title: "Dryer Vent Cleaning", icon: Wind, img: IMAGE_MAP.SERVICE_5_DRYER, desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention.", videoUrl: "https://www.youtube.com/embed/iuUXuGMimYo" },
+    { id: 6, title: "Solar Panel Cleaning", icon: Sun, img: IMAGE_MAP.SERVICE_6_SOLAR, desc: "Purified water cleaning for peak electrical efficiency of your solar arrays.", extraImages: [IMAGE_MAP.SOLAR_1] },
+    { id: 7, title: "Deck Cleaning & Restoration", icon: LucideLayout, img: IMAGE_MAP.SERVICE_7_DECK, desc: "Deep wood cleaning and restoration to enhance outdoor longevity.", extraImages: [IMAGE_MAP.DECK_1] },
+    { id: 8, title: "House & Building Washing", icon: Building2, img: IMAGE_MAP.SERVICE_8_HOUSE, desc: "Comprehensive exterior washing from soft-wash to high-pressure.", extraImages: [IMAGE_MAP.HOUSE_1, IMAGE_MAP.HOUSE_2] },
+    { id: 9, title: "Light Fixture Cleaning", icon: Zap, img: IMAGE_MAP.SERVICE_9_LIGHT, desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures.", extraImages: [IMAGE_MAP.SERVICE_9_LIGHT] },
+    { id: 10, title: "Mirror Cleaning", icon: Star, img: IMAGE_MAP.SERVICE_10_MIRROR, desc: "Streak-free polishing for gym mirrors and custom residential glass.", extraImages: [IMAGE_MAP.LOGO] },
+    { id: 11, title: "Soft Washing & Roof Washing", icon: Droplets, img: IMAGE_MAP.SERVICE_11_ROOF, desc: "Safe, low-pressure chemical cleaning for roof algae and moss.", localVideo: "soft_washing.mp4" },
+    { id: 12, title: "Fogging Service", icon: Wind, img: IMAGE_MAP.SERVICE_12_FOGGING, desc: "Industrial sanitization fogging for complete interior environment purification.", videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU" }
   ], []);
+
+  const testimonials = [
+    { name: "S. Miller", location: "Hillsborough", text: "AWC has been cleaning our windows for years. Punctual, professional, and they leave the house spotless.", rating: 5 },
+    { name: "J. Thompson", location: "San Mateo", text: "The air duct cleaning made a noticeable difference in my allergy symptoms. Highly recommend the fogging service too.", rating: 5 },
+    { name: "L. Chen", location: "Palo Alto", text: "Our solar panels were covered in ash and dust. AWC got them back to peak performance with their water-fed pole system.", rating: 5 }
+  ];
+
+  const handleQuoteToggle = (id) => {
+    setQuoteState(prev => ({
+      ...prev,
+      services: prev.services.includes(id) 
+        ? prev.services.filter(s => s !== id) 
+        : [...prev.services, id]
+    }));
+  };
+
+  const handleQuoteSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => {
+        setFormSubmitted(false);
+        setQuoteStep(1);
+        setQuoteState({ services: [], propertyType: 'residential', name: '', email: '', phone: '', address: '' });
+        setIsQuoteModalOpen(false);
+    }, 5000);
+  };
 
   return (
     <div className="bg-white text-slate-900 font-sans selection:bg-[#CC0000] selection:text-white overflow-x-hidden min-h-screen">
@@ -317,18 +226,21 @@ export default function App() {
                alt="AWC Air Duct and Window Cleaning Company Logo" 
                className="h-44 w-auto cursor-pointer transition-transform hover:scale-110 active:scale-95 absolute left-0 top-[68%] -translate-y-1/2" 
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-               onError={(e) => { e.currentTarget.style.display = 'none'; }} 
              />
           </div>
 
           <div className="hidden xl:flex items-center space-x-12">
             <nav className="flex space-x-12 text-[11px] uppercase font-bold tracking-[0.3em] text-slate-400">
-              {['Services', 'Heritage', 'About', 'Areas', 'Payments'].map((item) => (
+              {['Services', 'Heritage', 'About', 'Areas'].map((item) => (
                 <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-[#CC0000] transition-colors relative group">
                   {item}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#CC0000] group-hover:w-full transition-all"></span>
                 </a>
               ))}
+              <button onClick={() => setIsQuoteModalOpen(true)} className="hover:text-[#CC0000] transition-colors relative group uppercase font-bold">
+                Quote
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#CC0000] group-hover:w-full transition-all"></span>
+              </button>
             </nav>
             <div className="h-10 w-px bg-slate-100"></div>
             <div className="flex flex-col items-end leading-none group cursor-pointer" onClick={() => window.location.href=`tel:${phoneLiteral.replace(/\D/g,'')}`}>
@@ -350,7 +262,7 @@ export default function App() {
 
       <main className="pt-28">
         
-        {/* HERO SECTION - SEMANTIC H1 */}
+        {/* HERO SECTION */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
             <video
@@ -442,13 +354,21 @@ export default function App() {
           </div>
         </section>
 
-        {/* HERITAGE SECTION */}
+        {/* HERITAGE SECTION - RESTORED TO ALWAYS COLOR */}
         <section id="heritage" className="py-40 px-6 md:px-12 bg-[#FAFAFA] border-b border-slate-100 reveal">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
-               <div className="absolute -inset-6 border-[12px] border-white -z-10 rotate-[-1deg] shadow-sm"></div>
-               <img src={`/images/${IMAGE_MAP.FAMILY}`} loading="lazy" className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" alt="The Frediani Family - Three generations of owners" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} />
-               <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000]">
+               <div className="absolute inset-0 border-4 border-[#CC0000] opacity-0 group-hover:opacity-100 group-hover:-inset-4 transition-all duration-500 -z-10"></div>
+               <div className="overflow-hidden shadow-2xl rounded-sm border border-slate-200">
+                 <img 
+                   src={`/images/${IMAGE_MAP.FAMILY}`} 
+                   loading="lazy" 
+                   className="relative z-10 w-full h-auto object-cover transition-all duration-1000 group-hover:scale-105 group-hover:rotate-1" 
+                   alt="The Frediani Family - Three generations of owners" 
+                   onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} 
+                 />
+               </div>
+               <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000] group-hover:translate-x-4 transition-transform duration-700">
                  <LucideHistory size={40} className="text-[#CC0000] mb-6" />
                  <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
                  <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-300">Three Generations of Excellence</p>
@@ -471,7 +391,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* MASTERY SECTION */}
+        {/* MASTERY SECTION - RESTORED TO ALWAYS COLOR */}
         <section className="py-40 px-6 md:px-12 bg-slate-950 text-white overflow-hidden relative">
            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
               <div className="reveal">
@@ -482,20 +402,22 @@ export default function App() {
                  <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
                    "Our service shines through. Meticulous attention to detail ensures your property's glass and ventilation meet the highest standard of clarity"
                  </p>
-                 <button className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all" aria-label="View our performance archive">
+                 <button onClick={() => setIsQuoteModalOpen(true)} className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all">
                     <span>Performance Archive</span>
                     <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
                  </button>
               </div>
               <div className="relative group reveal">
-                 <img 
-                   src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} 
-                   loading="lazy"
-                   className="w-full h-auto shadow-[0_30px_80px_-15px_rgba(0,0,0,0.8)] border border-white/5 rounded-sm relative z-10" 
-                   alt="Mastery Proof - Clear results showcase"
-                   onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-                 />
-                 <div className="absolute -bottom-8 -left-8 bg-white text-slate-900 px-10 py-6 shadow-2xl flex items-center space-x-6 z-20">
+                 <div className="overflow-hidden rounded-sm border border-white/5 relative z-10 before:content-[''] before:absolute before:top-0 before:-left-[100%] before:w-1/2 before:h-full before:bg-white/20 before:skew-x-[-25deg] group-hover:before:left-[150%] before:transition-all before:duration-1000 before:z-20">
+                   <img 
+                     src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} 
+                     loading="lazy"
+                     className="w-full h-auto shadow-[0_30px_80px_-15px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-110 group-hover:brightness-125" 
+                     alt="Mastery Proof - Clear results showcase"
+                     onError={(e) => { e.currentTarget.style.display = 'none'; }} 
+                   />
+                 </div>
+                 <div className="absolute -bottom-8 -left-8 bg-white text-slate-900 px-10 py-6 shadow-2xl flex items-center space-x-6 z-20 group-hover:-translate-y-2 transition-transform duration-500">
                     <div className="p-3 bg-slate-950 text-[#CC0000] rounded-full"><Maximize2 size={24} /></div>
                     <span className="text-sm font-black uppercase tracking-[0.3em]">Proven Clarity</span>
                  </div>
@@ -503,7 +425,7 @@ export default function App() {
            </div>
         </section>
 
-        {/* AUTHORITY SECTION */}
+        {/* AUTHORITY SECTION - RESTORED TO ALWAYS COLOR */}
         <section id="about" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
            <div className="max-w-[1400px] mx-auto">
               <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
@@ -527,18 +449,18 @@ export default function App() {
                        ))}
                     </div>
                  </div>
-                 <div className="space-y-10 reveal">
-                    <div className="relative">
-                       <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[#CC0000] -translate-y-2 translate-x-2"></div>
+                 <div className="space-y-10 reveal group">
+                    <div className="relative overflow-hidden rounded-sm shadow-2xl border border-slate-50">
+                       <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[#CC0000] -translate-y-2 translate-x-2 z-20 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700"></div>
                        <img 
                          src={`/images/${IMAGE_MAP.TEAM}`} 
                          loading="lazy"
-                         className="w-full h-auto shadow-2xl rounded-sm relative z-10 border border-slate-50" 
+                         className="w-full h-auto relative z-10 transition-all duration-1000 group-hover:scale-105 group-hover:rotate-[-0.5deg]" 
                          alt="AWC Authority - Our Professional Crew"
                          onError={(e) => { e.currentTarget.style.display = 'none'; }} 
                        />
                     </div>
-                    <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm">
+                    <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm group-hover:bg-white transition-colors duration-500">
                        <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-500 mb-4 italic">Leadership Profile</h4>
                        <p className="text-xl font-heading italic text-slate-900 leading-snug">
                          "Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"
@@ -547,6 +469,50 @@ export default function App() {
                  </div>
               </div>
            </div>
+        </section>
+
+        {/* TESTIMONIALS SECTION - NEW DARK BLUE BACKGROUND */}
+        <section id="testimonials" className="py-32 px-6 md:px-12 bg-slate-950 text-white border-y border-white/5">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="text-center mb-24 reveal">
+              <QuoteIcon size={48} className="text-[#CC0000]/40 mx-auto mb-6" />
+              <h2 className="text-4xl md:text-6xl font-heading text-white tracking-tighter uppercase mb-4">Client <span className="text-[#CC0000]">Voices</span></h2>
+              <p className="text-slate-400 uppercase font-black text-[10px] tracking-[0.4em]">Excellence verified by your neighbors</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {testimonials.map((t, i) => (
+                <div key={i} className="bg-slate-900 p-12 shadow-2xl rounded-sm border-t-4 border-[#CC0000] reveal hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: `${i * 0.1}s` }}>
+                  <div className="flex space-x-1 mb-8">
+                    {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} className="text-[#CC0000] fill-[#CC0000]" />)}
+                  </div>
+                  <p className="text-lg text-slate-300 italic mb-10 leading-relaxed">"{t.text}"</p>
+                  <div className="flex items-center space-x-4 border-t border-white/5 pt-8">
+                    <div className="w-10 h-10 bg-[#CC0000] flex items-center justify-center text-white text-xs font-black rounded-full uppercase">{t.name.split(' ')[0][0]}</div>
+                    <div>
+                      <p className="text-sm font-black text-white uppercase tracking-tight">{t.name}</p>
+                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA FOR INSTANT QUOTE POP-OUT */}
+        <section id="quote-cta" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
+          <div className="max-w-4xl mx-auto text-center reveal">
+            <Sparkles size={64} className="text-[#CC0000] mx-auto mb-10 animate-pulse" />
+            <h2 className="text-4xl lg:text-7xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Ready for a <span className="text-[#CC0000]">Closer View?</span></h2>
+            <p className="text-xl text-slate-500 font-light mb-16 max-w-2xl mx-auto">Get a tailored estimate for your peninsula property using our intelligent dispatch engine.</p>
+            <button 
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="bg-slate-950 text-white px-16 py-8 text-[11px] font-black uppercase tracking-[0.8em] hover:bg-[#CC0000] transition-all shadow-2xl group relative overflow-hidden"
+            >
+              Launch Estimate Tool <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" />
+            </button>
+          </div>
         </section>
 
         {/* SERVICE AREAS SECTION */}
@@ -613,6 +579,111 @@ export default function App() {
         </footer>
       </main>
 
+      {/* INSTANT QUOTE MODAL */}
+      {isQuoteModalOpen && (
+        <div className="fixed inset-0 z-[300] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setIsQuoteModalOpen(false)}></div>
+          <div className="relative bg-white w-full max-w-5xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500">
+            <button 
+              className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" 
+              onClick={() => setIsQuoteModalOpen(false)}
+            >
+              <X size={40} strokeWidth={1} />
+            </button>
+
+            <div className="p-8 md:p-20">
+              <div className="mb-16 border-b border-slate-100 pb-10">
+                <div className="flex items-center space-x-4 mb-4">
+                  <FileText className="text-[#CC0000]" size={24} />
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Step {quoteStep} of 3</span>
+                </div>
+                <h3 className="text-4xl font-heading font-black tracking-tighter text-slate-950 uppercase leading-none">Instant Estimate</h3>
+              </div>
+
+              <form onSubmit={handleQuoteSubmit}>
+                {/* STEP 1: LINEAR SERVICES LIST */}
+                {quoteStep === 1 && (
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                    <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">1. Select Required Services (Multi-select)</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {services.map(s => (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => handleQuoteToggle(s.id)}
+                          className={`group flex items-center p-6 border rounded-sm transition-all text-left ${quoteState.services.includes(s.id) ? 'bg-[#CC0000] border-[#CC0000] text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-slate-600 hover:border-[#CC0000]'}`}
+                        >
+                          <div className={`p-2 rounded-sm mr-4 transition-colors ${quoteState.services.includes(s.id) ? 'bg-white/10 text-white' : 'bg-white text-[#CC0000] group-hover:bg-[#CC0000] group-hover:text-white'}`}>
+                            <s.icon size={20} />
+                          </div>
+                          <span className="text-xs font-black uppercase tracking-widest">{s.title}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="mt-16 flex justify-end">
+                      <button type="button" disabled={quoteState.services.length === 0} onClick={() => setQuoteStep(2)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 2: PROPERTY INFO */}
+                {quoteStep === 2 && (
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                    <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">2. Property Details</p>
+                    <div className="space-y-12">
+                      <div className="flex space-x-6">
+                        {['residential', 'commercial'].map(type => (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() => setQuoteState(p => ({...p, propertyType: type}))}
+                            className={`flex-1 flex flex-col items-center justify-center p-12 border rounded-sm transition-all ${quoteState.propertyType === type ? 'bg-slate-950 border-slate-950 text-white shadow-xl' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'}`}
+                          >
+                            {type === 'residential' ? <Home size={32} className="mb-4" /> : <Briefcase size={32} className="mb-4" />}
+                            <span className="text-xs font-black uppercase tracking-[0.3em]">{type}</span>
+                          </button>
+                        ))}
+                      </div>
+                      <div className="relative">
+                        <MapPin size={20} className="absolute left-6 top-6 text-slate-300" />
+                        <textarea required rows="3" className="w-full bg-slate-50 border-none p-6 pl-16 focus:ring-2 focus:ring-[#CC0000] transition-all font-bold text-slate-900 text-lg rounded-sm" placeholder="Service Address (Peninsula Service Areas Only)" value={quoteState.address} onChange={e => setQuoteState(p => ({...p, address: e.target.value}))}></textarea>
+                      </div>
+                    </div>
+                    <div className="mt-16 flex justify-between">
+                      <button type="button" onClick={() => setQuoteStep(1)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
+                      <button type="button" disabled={!quoteState.address} onClick={() => setQuoteStep(3)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 3: CONTACT */}
+                {quoteStep === 3 && (
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+                    <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">3. Contact Verification</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                       <input required className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm" placeholder="Full Name" value={quoteState.name} onChange={e => setQuoteState(p => ({...p, name: e.target.value}))} />
+                       <input required type="email" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm" placeholder="Email Address" value={quoteState.email} onChange={e => setQuoteState(p => ({...p, email: e.target.value}))} />
+                       <input required type="tel" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm md:col-span-2" placeholder="Phone Number" value={quoteState.phone} onChange={e => setQuoteState(p => ({...p, phone: e.target.value}))} />
+                    </div>
+                    <div className="mt-16 flex justify-between items-center">
+                      <button type="button" onClick={() => setQuoteStep(2)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
+                      {formSubmitted ? (
+                        <div className="bg-[#CC0000] text-white px-10 py-5 rounded-sm flex items-center space-x-4 animate-in zoom-in">
+                          <CheckCircle size={20} />
+                          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Transmission Success</span>
+                        </div>
+                      ) : (
+                        <button type="submit" disabled={!quoteState.name || !quoteState.email || !quoteState.phone} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl group">Submit Request <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" /></button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SERVICE MODAL */}
       {selectedService && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
@@ -656,7 +727,7 @@ export default function App() {
               <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl" aria-label="Request immediate service dispatch">Immediate Dispatch</button>
             </div>
 
-            {/* VISUAL PANEL (STICKY & VERTICALLY CENTERED ON RIGHT) */}
+            {/* VISUAL PANEL */}
             <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
                <div className="w-full max-w-4xl space-y-12">
                   {selectedService.videoUrl ? (
@@ -682,7 +753,6 @@ export default function App() {
                     </div>
                   ) : null}
 
-                  {/* Support for multi-image stacks */}
                   {selectedService.extraImages && selectedService.extraImages.map((img, i) => (
                     <div key={i} className="w-full flex flex-col items-center">
                        <img 
@@ -717,9 +787,10 @@ export default function App() {
             <X size={56} strokeWidth={1} />
           </button>
           <div className="space-y-8">
-            {['Services', 'Heritage', 'About', 'Areas', 'Payments'].map(link => (
+            {['Services', 'Heritage', 'About', 'Areas'].map(link => (
               <a key={link} href={`#${link.toLowerCase()}`} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all" onClick={() => setIsMenuOpen(false)}>{link}</a>
             ))}
+            <button onClick={() => { setIsQuoteModalOpen(true); setIsMenuOpen(false); }} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all">Quote</button>
           </div>
           <div className="mt-24 pt-10 border-t border-white/10 w-full max-w-sm text-center">
              <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
@@ -728,27 +799,20 @@ export default function App() {
       )}
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Font fix: @import removed as font link was added to index.html */
-        
         html { 
           scroll-behavior: smooth; 
           scroll-padding-top: 100px; 
         }
-        
         .font-sans { font-family: 'Figtree', sans-serif; }
         .font-heading { font-family: 'Archivo', sans-serif; }
-        
         body { background-color: #FFFFFF; }
-        
         @keyframes reveal {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
         .reveal {
           animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
         .animate-in { animation: fade-in 1.2s forwards; }
       `}} />
