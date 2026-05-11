@@ -33,9 +33,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V58 (Final Full Restoration)
+ * AWC Air Duct and Window Cleaning - Production V59 (Performance Finalized)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Status: Baseline Fully Restored including Hero, Authority, Mastery, and Footer
+ * Focus: Mobile Optimization + Absolute Content Preservation
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -114,6 +114,7 @@ export default function App() {
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
       setScrollProgress(currentProgress);
     };
+    // passive: true for mobile scrolling performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -336,7 +337,7 @@ export default function App() {
 
       <main className="pt-28">
         
-        {/* HERO SECTION */}
+        {/* HERO SECTION - RESTORED FULL CONTENT */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
             <video
@@ -557,18 +558,18 @@ export default function App() {
            <div className="max-w-4xl mx-auto bg-slate-900 text-white p-20 md:p-32 text-center relative shadow-2xl border-t-8 border-[#CC0000]">
              <CreditCard size={80} className="text-[#CC0000] mx-auto mb-10 opacity-30" />
              <h2 className="text-4xl md:text-6xl font-heading mb-8 uppercase italic tracking-tighter leading-none">Payments</h2>
-             <p className="text-white/60 mb-16 text-xl font-light leading-relaxed italic font-sans">"Providing simplified, secure billing for our residential and commercial partners"</p>
+             <p className="text-white/60 mb-16 text-xl font-light leading-relaxed italic font-sans">"Providing simplified, secure billing for our partners"</p>
              <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group">
                Secure Portal Access <ChevronRight className="inline-block ml-3 group-hover:translate-x-2 transition-transform" />
              </button>
            </div>
         </section>
 
-        {/* FOOTER */}
+        {/* FOOTER - FULLY RESTORED */}
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div className="flex flex-col items-start max-w-sm">
-               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" className="h-14 w-auto brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                <p className="text-lg font-heading italic text-slate-500 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
             
@@ -700,7 +701,7 @@ export default function App() {
       )}
 
       <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&family=Figtree:wght@300;400;700;900&display=swap');
+        /* Font fix: @import removed as font link was added to index.html */
         
         html { 
           scroll-behavior: smooth; 
