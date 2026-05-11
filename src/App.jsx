@@ -8,43 +8,40 @@ import {
   ArrowRight, 
   ShieldCheck, 
   Clock, 
-  ExternalLink,
-  ChevronRight,
-  Droplets,
-  Building2,
-  Fan,
-  CreditCard,
-  Users2,
-  Truck,
-  Sun,
-  Waves,
-  Zap,
-  Layout as LucideLayout,
-  Maximize2,
-  Play as LucidePlay,
-  Award,
-  History as LucideHistory,
-  ArrowUpRight,
-  Star,
-  ShieldAlert,
-  Users,
-  MapPin,
-  CheckCircle,
-  Mail,
-  Home,
-  Briefcase,
-  Quote as QuoteIcon,
-  Sparkles,
-  Layers,
-  ClipboardCheck,
-  UserCheck,
-  FileText
+  ExternalLink, 
+  ChevronRight, 
+  Droplets, 
+  Building2, 
+  Fan, 
+  CreditCard, 
+  Users2, 
+  Truck, 
+  Sun, 
+  Waves, 
+  Zap, 
+  Layout as LucideLayout, 
+  Maximize2, 
+  Play as LucidePlay, 
+  Award, 
+  History as LucideHistory, 
+  ArrowUpRight, 
+  Star, 
+  ShieldAlert, 
+  Users, 
+  MapPin, 
+  CheckCircle, 
+  Mail, 
+  Home, 
+  Briefcase, 
+  Quote as QuoteIcon, 
+  Sparkles, 
+  FileText 
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V65 (Visual & Palette Shift)
+ * AWC Air Duct and Window Cleaning - Production V72 (Balanced Hero Weight)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Focus: Full-Color Mastery + Dark Testimonial Suite + 100 SEO
+ * Features: Tight Red Highlights, Optimized Font Weights, Popout Quote Engine
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -88,28 +85,34 @@ const IMAGE_MAP = {
   HOUSE_2: "house_washing_2.avif"
 };
 
-const FloatingSocials = ({ links }) => (
-  <div className="fixed bottom-10 left-10 z-[100] flex flex-col space-y-4">
-    {[
-      { icon: SocialSVG.Instagram, href: links.instagram, label: 'Instagram' },
-      { icon: SocialSVG.Facebook, href: links.facebook, label: 'Facebook' },
-      { icon: SocialSVG.TikTok, href: links.tiktok, label: 'TikTok' },
-      { icon: SocialSVG.X, href: links.x, label: 'X' },
-      { icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
-      { icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
-    ].map((item, i) => (
-      <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
-        <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
-          <div className="absolute inset-0 rounded-full group-hover:animate-ping bg-[#CC0000]/20 opacity-0 group-hover:opacity-100"></div>
-          <item.icon />
-        </div>
-        <span className="opacity-0 group-hover:opacity-100 ml-4 text-[9px] font-black uppercase tracking-[0.2em] text-white bg-slate-900 px-3 py-1.5 shadow-sm rounded-sm pointer-events-none transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap">
-          {item.label}
-        </span>
-      </a>
-    ))}
-  </div>
-);
+const FloatingSocials = ({ links }) => {
+  if (!links) return null;
+  return (
+    <div className="fixed bottom-10 left-10 z-[100] flex flex-col space-y-4">
+      {[
+        { icon: SocialSVG.Instagram, href: links.instagram, label: 'Instagram' },
+        { icon: SocialSVG.Facebook, href: links.facebook, label: 'Facebook' },
+        { icon: SocialSVG.TikTok, href: links.tiktok, label: 'TikTok' },
+        { icon: SocialSVG.X, href: links.x, label: 'X' },
+        { icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
+        { icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
+      ].map((item, i) => {
+        const Icon = item.icon;
+        return (
+          <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
+            <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
+              <div className="absolute inset-0 rounded-full group-hover:animate-ping bg-[#CC0000]/20 opacity-0 group-hover:opacity-100"></div>
+              <Icon />
+            </div>
+            <span className="opacity-0 group-hover:opacity-100 ml-4 text-[9px] font-black uppercase tracking-[0.2em] text-white bg-slate-900 px-3 py-1.5 shadow-sm rounded-sm pointer-events-none transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap">
+              {item.label}
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  );
+};
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -128,9 +131,19 @@ export default function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const phoneLiteral = "(650) 583-0420";
+
+  // Restore Missing socialLinks definition
+  const socialLinks = useMemo(() => ({
+    instagram: "https://www.instagram.com/airductandwindowcleaning/",
+    facebook: "https://www.facebook.com/bayareaawindowcleaning",
+    tiktok: "https://www.tiktok.com/@bayareawindowcleaning",
+    x: "https://x.com/SFductcleaner",
+    yelp: "https://www.yelp.com/biz/awc-air-duct-and-window-cleaning-millbrae",
+    nextdoor: "https://nextdoor.com/page/awc-air-duct-window-cleaning-millbrae-ca"
+  }), []);
   
   useEffect(() => {
-    // SEO: Dynamic Meta Description and Title Management
+    // SEO Enhancement
     document.title = "AWC Air Duct & Window Cleaning | Bay Area Professional Services";
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -149,15 +162,6 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const socialLinks = {
-    instagram: "https://www.instagram.com/airductandwindowcleaning/",
-    facebook: "https://www.facebook.com/bayareaawindowcleaning",
-    tiktok: "https://www.tiktok.com/@bayareawindowcleaning",
-    x: "https://x.com/SFductcleaner",
-    yelp: "https://www.yelp.com/biz/awc-air-duct-and-window-cleaning-millbrae",
-    nextdoor: "https://nextdoor.com/page/awc-air-duct-window-cleaning-millbrae-ca"
-  };
-
   const serviceLocations = useMemo(() => [
     "Atherton", "Belmont", "Brisbane", "Burlingame", "Colma", "Daly City",
     "El Granada", "Foster City", "Half Moon Bay", "Hillsborough", "Los Altos Hills",
@@ -167,12 +171,7 @@ export default function App() {
   ], []);
 
   const services = useMemo(() => [
-    { 
-      id: 1, title: "Air Duct Cleaning", icon: Fan, img: IMAGE_MAP.SERVICE_1_DUCT, 
-      desc: "Professional high-static ventilation sanitization for your residential or commercial property.",
-      videoUrl: "https://www.youtube.com/embed/_FHWKTUiykM",
-      longDesc: ["According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit.”", "Clean ducts help your system run more efficiently and reduce harmful allergens."]
-    },
+    { id: 1, title: "Air Duct Cleaning", icon: Fan, img: IMAGE_MAP.SERVICE_1_DUCT, desc: "Professional high-static ventilation sanitization for your residential or commercial property.", videoUrl: "https://www.youtube.com/embed/_FHWKTUiykM", longDesc: ["According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit.”", "Clean ducts help your system run more efficiently and reduce harmful allergens."] },
     { id: 2, title: "Window Cleaning", icon: Building2, img: IMAGE_MAP.SERVICE_2_WINDOW, desc: "Interior and exterior window cleaning for storefronts, residential estates, and skyscrapers.", localVideo: "window_cleaning.mp4", extraImages: [IMAGE_MAP.WINDOW_LADDER] },
     { id: 3, title: "Pressure Washing", icon: Waves, img: IMAGE_MAP.SERVICE_3_PRESSURE, desc: "Precision surface restoration for driveways, siding, and building perimeters.", localVideo: "pressure_cleaning.mp4" },
     { id: 4, title: "Gutter Cleaning", icon: Droplets, img: IMAGE_MAP.SERVICE_4_GUTTER, desc: "Debris removal and system flushing to protect property foundations and roofs.", extraImages: [IMAGE_MAP.GUTTER_1, IMAGE_MAP.GUTTER_2] },
@@ -186,11 +185,11 @@ export default function App() {
     { id: 12, title: "Fogging Service", icon: Wind, img: IMAGE_MAP.SERVICE_12_FOGGING, desc: "Industrial sanitization fogging for complete interior environment purification.", videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU" }
   ], []);
 
-  const testimonials = [
+  const testimonials = useMemo(() => [
     { name: "S. Miller", location: "Hillsborough", text: "AWC has been cleaning our windows for years. Punctual, professional, and they leave the house spotless.", rating: 5 },
     { name: "J. Thompson", location: "San Mateo", text: "The air duct cleaning made a noticeable difference in my allergy symptoms. Highly recommend the fogging service too.", rating: 5 },
     { name: "L. Chen", location: "Palo Alto", text: "Our solar panels were covered in ash and dust. AWC got them back to peak performance with their water-fed pole system.", rating: 5 }
-  ];
+  ], []);
 
   const handleQuoteToggle = (id) => {
     setQuoteState(prev => ({
@@ -223,7 +222,7 @@ export default function App() {
           <div className="relative w-48 h-16 flex items-center">
              <img 
                src={`/images/${IMAGE_MAP.LOGO}`} 
-               alt="AWC Air Duct and Window Cleaning Company Logo" 
+               alt="AWC Company Logo" 
                className="h-44 w-auto cursor-pointer transition-transform hover:scale-110 active:scale-95 absolute left-0 top-[68%] -translate-y-1/2" 
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
              />
@@ -250,19 +249,13 @@ export default function App() {
               </span>
             </div>
           </div>
-          <button 
-            className="xl:hidden p-2 hover:bg-slate-50 rounded-full" 
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Open Mobile Menu"
-          >
-            <Menu size={32} />
-          </button>
+          <button className="xl:hidden p-2 hover:bg-slate-50 rounded-full" onClick={() => setIsMenuOpen(true)} aria-label="Open Menu"><Menu size={32} /></button>
         </div>
       </header>
 
       <main className="pt-28">
         
-        {/* HERO SECTION */}
+        {/* HERO SECTION - TIGHT "TEXT SELECTION" STYLE HIGHLIGHTS */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
             <video
@@ -270,22 +263,18 @@ export default function App() {
               muted
               loop
               playsInline
-              title="AWC Professional Cleaning Showcase Video"
+              title="AWC Professional Cleaning Showcase"
               poster={`/images/${IMAGE_MAP.HERO_POSTER}`}
-              className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
+              className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
             >
               <source src={`/images/${IMAGE_MAP.HERO_VIDEO}`} type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-slate-950/30"></div>
+            <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110"></div>
           </div>
 
           <div className="relative z-20 max-w-7xl mx-auto w-full py-8 text-center reveal">
             <div className="mb-6 flex flex-col items-center">
-               <img 
-                 src={`/images/${IMAGE_MAP.LOGO}`} 
-                 alt="AWC Logo - Celebrating 70+ years of quality" 
-                 className="h-64 w-auto mb-6 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in" 
-               />
+               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="" className="h-64 w-auto mb-6 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in" />
                <div className="flex items-center space-x-8 mb-6">
                 <div className="h-0.5 w-12 bg-[#CC0000]"></div>
                 <span className="text-xs font-black uppercase tracking-[0.4em] text-white bg-[#CC0000] px-5 py-1.5 rounded-sm shadow-2xl">Established 1946</span>
@@ -293,20 +282,39 @@ export default function App() {
               </div>
             </div>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading leading-[1.2] text-white mb-6 tracking-tight uppercase drop-shadow-xl max-w-5xl mx-auto">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading leading-[1.2] text-white mb-6 tracking-tight uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.8)] max-w-5xl mx-auto">
               Where quality cleaning <br /> 
               meets <span className="text-[#CC0000]">family values</span>
             </h1>
             
             <div className="flex flex-col items-center space-y-8">
-               <p className="text-lg md:text-xl text-white/90 font-light leading-relaxed max-w-3xl italic font-sans mx-auto">
-                 Three generations of mastery in glass clarity and professional ventilation systems.
+               <p className="text-lg md:text-xl text-white font-bold leading-[1.8] max-w-3xl italic font-sans mx-auto drop-shadow-2xl">
+                 <span className="bg-[#CC0000] px-2 py-0.5 [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+                   Three generations of mastery in glass clarity and professional ventilation systems.
+                 </span>
                </p>
                <div className="h-10 w-px bg-[#CC0000]"></div>
-               <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-white/60 text-[9px] uppercase font-black tracking-[0.3em]">
-                  <div className="flex items-center space-x-3"><CheckCircle2 size={14} className="text-[#CC0000]" /> <span>Residential</span></div>
-                  <div className="flex items-center space-x-3"><CheckCircle2 size={14} className="text-[#CC0000]" /> <span>Commercial</span></div>
-                  <div className="flex items-center space-x-3"><CheckCircle2 size={14} className="text-[#CC0000]" /> <span>Industrial</span></div>
+               <div className="flex flex-wrap justify-center gap-x-4 gap-y-4 text-white text-[10px] uppercase font-bold tracking-[0.3em]">
+                  <div className="flex items-center">
+                    <span className="bg-[#CC0000] px-2.5 py-0.5 rounded-sm flex items-center space-x-2 shadow-lg drop-shadow-lg">
+                      <CheckCircle2 size={12} /> <span>Residential</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="bg-[#CC0000] px-2.5 py-0.5 rounded-sm flex items-center space-x-2 shadow-lg drop-shadow-lg">
+                      <CheckCircle2 size={12} /> <span>Commercial</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="bg-[#CC0000] px-2.5 py-0.5 rounded-sm flex items-center space-x-2 shadow-lg drop-shadow-lg">
+                      <CheckCircle2 size={12} /> <span>Industrial</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="bg-[#CC0000] px-2.5 py-0.5 rounded-sm flex items-center space-x-2 shadow-lg drop-shadow-lg">
+                      <CheckCircle2 size={12} /> <span>Services</span>
+                    </span>
+                  </div>
                </div>
             </div>
           </div>
@@ -354,18 +362,17 @@ export default function App() {
           </div>
         </section>
 
-        {/* HERITAGE SECTION - RESTORED TO ALWAYS COLOR */}
+        {/* HERITAGE SECTION - FULL COLOR ZOOM */}
         <section id="heritage" className="py-40 px-6 md:px-12 bg-[#FAFAFA] border-b border-slate-100 reveal">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
                <div className="absolute inset-0 border-4 border-[#CC0000] opacity-0 group-hover:opacity-100 group-hover:-inset-4 transition-all duration-500 -z-10"></div>
-               <div className="overflow-hidden shadow-2xl rounded-sm border border-slate-200">
+               <div className="overflow-hidden shadow-2xl rounded-sm border border-slate-200 bg-slate-900">
                  <img 
                    src={`/images/${IMAGE_MAP.FAMILY}`} 
                    loading="lazy" 
                    className="relative z-10 w-full h-auto object-cover transition-all duration-1000 group-hover:scale-105 group-hover:rotate-1" 
-                   alt="The Frediani Family - Three generations of owners" 
-                   onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} 
+                   alt="The Frediani Family - Three generations" 
                  />
                </div>
                <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000] group-hover:translate-x-4 transition-transform duration-700">
@@ -375,70 +382,52 @@ export default function App() {
                </div>
             </div>
             <div className="lg:pl-10">
-              <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">
-                Heritage
-              </h2>
-              <div className="space-y-10 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans reveal">
-                   <p className="relative">
-                     <span className="text-6xl md:text-8xl font-black text-[#CC0000] float-left mr-6 leading-[0.7] mt-3 select-none">F</span>
-                     or three generations, dating back to 1946, <strong>AWC Air Duct & Window Cleaning</strong> has proudly served the Bay Area with exceptional care and quality. 
-                     It all began with the vision of founder <strong>Frank Frediani</strong>, continued by his son <strong>Ron</strong>, who transitioned from a role in San Francisco's Window Cleaners Union to help lead AWC. 
-                     Today, Ron and his wife Carol, along with their son Joe, own and operate AWC. Our highly skilled team is committed to delivering top-quality service safely and efficiently. 
-                     As a family-owned business, we prioritize exceptional customer service, guaranteeing punctuality, tidiness, and a consistently courteous approach.
-                   </p>
-                 </div>
+              <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">Heritage</h2>
+              <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans">
+                <span className="text-6xl md:text-8xl font-black text-[#CC0000] float-left mr-6 leading-[0.7] mt-3 select-none">F</span>
+                or three generations, dating back to 1946, <strong>AWC Air Duct & Window Cleaning</strong> has proudly served the Bay Area with exceptional care and quality. Founded by Frank Frediani, the legacy is carried forward today by Ron, Carol, and Joe Joe. We prioritize punctuality, tidiness, and a consistently courteous family-first approach.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* MASTERY SECTION - RESTORED TO ALWAYS COLOR */}
+        {/* MASTERY SECTION - CLARITY SWEEP */}
         <section className="py-40 px-6 md:px-12 bg-slate-950 text-white overflow-hidden relative">
            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
               <div className="reveal">
                  <div className="w-12 h-1.5 bg-[#CC0000] mb-10"></div>
-                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">
-                   Mastery <br/> <span className="text-[#CC0000]">Revealed</span>
-                 </h2>
+                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">Mastery <br/> <span className="text-[#CC0000]">Revealed</span></h2>
                  <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
                    "Our service shines through. Meticulous attention to detail ensures your property's glass and ventilation meet the highest standard of clarity"
                  </p>
                  <button onClick={() => setIsQuoteModalOpen(true)} className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all">
-                    <span>Performance Archive</span>
+                    <span>Request Clarity</span>
                     <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
                  </button>
               </div>
               <div className="relative group reveal">
                  <div className="overflow-hidden rounded-sm border border-white/5 relative z-10 before:content-[''] before:absolute before:top-0 before:-left-[100%] before:w-1/2 before:h-full before:bg-white/20 before:skew-x-[-25deg] group-hover:before:left-[150%] before:transition-all before:duration-1000 before:z-20">
-                   <img 
-                     src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} 
-                     loading="lazy"
-                     className="w-full h-auto shadow-[0_30px_80px_-15px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-110 group-hover:brightness-125" 
-                     alt="Mastery Proof - Clear results showcase"
-                     onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-                   />
+                   <img src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} loading="lazy" className="w-full h-auto transition-all duration-1000 group-hover:scale-110 group-hover:brightness-125" alt="Mastery Results" />
                  </div>
                  <div className="absolute -bottom-8 -left-8 bg-white text-slate-900 px-10 py-6 shadow-2xl flex items-center space-x-6 z-20 group-hover:-translate-y-2 transition-transform duration-500">
                     <div className="p-3 bg-slate-950 text-[#CC0000] rounded-full"><Maximize2 size={24} /></div>
-                    <span className="text-sm font-black uppercase tracking-[0.3em]">Proven Clarity</span>
+                    <span className="text-sm font-black uppercase tracking-[0.3em]">Proven Results</span>
                  </div>
               </div>
            </div>
         </section>
 
-        {/* AUTHORITY SECTION - RESTORED TO ALWAYS COLOR */}
+        {/* AUTHORITY SECTION - FULL COLOR ZOOM */}
         <section id="about" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
            <div className="max-w-[1400px] mx-auto">
               <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
                  <div className="space-y-12 reveal">
                     <h3 className="text-4xl lg:text-6xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
                     <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light font-sans max-w-lg">
-                       We are proud to be active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols.
+                       We are active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols and aerial systems.
                     </p>
                     <div className="grid grid-cols-1 gap-5">
-                       {[
-                         { icon: ShieldCheck, title: "Liability & Workers' Comp", desc: "Full Comprehensive Protection" },
-                         { icon: Award, title: "Aerial Platform Certified", desc: "Specialized High-Reach Systems" }
-                       ].map((item, i) => (
+                       {[{ icon: ShieldCheck, title: "Liability & Workers' Comp", desc: "Full Comprehensive Protection" }, { icon: Award, title: "Aerial Platform Certified", desc: "Specialized High-Reach Systems" }].map((item, i) => (
                          <div key={i} className="flex items-center space-x-8 p-8 bg-slate-50 border border-slate-100 rounded-sm hover:border-[#CC0000] transition-all group/card">
                             <item.icon className="text-[#CC0000] group-hover/card:scale-110 transition-transform" size={32} />
                             <div>
@@ -452,26 +441,17 @@ export default function App() {
                  <div className="space-y-10 reveal group">
                     <div className="relative overflow-hidden rounded-sm shadow-2xl border border-slate-50">
                        <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[#CC0000] -translate-y-2 translate-x-2 z-20 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700"></div>
-                       <img 
-                         src={`/images/${IMAGE_MAP.TEAM}`} 
-                         loading="lazy"
-                         className="w-full h-auto relative z-10 transition-all duration-1000 group-hover:scale-105 group-hover:rotate-[-0.5deg]" 
-                         alt="AWC Authority - Our Professional Crew"
-                         onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-                       />
+                       <img src={`/images/${IMAGE_MAP.TEAM}`} loading="lazy" className="w-full h-auto relative z-10 transition-all duration-1000 group-hover:scale-105 group-hover:rotate-[-0.5deg]" alt="Professional Team" />
                     </div>
                     <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm group-hover:bg-white transition-colors duration-500">
-                       <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-500 mb-4 italic">Leadership Profile</h4>
-                       <p className="text-xl font-heading italic text-slate-900 leading-snug">
-                         "Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"
-                       </p>
+                       <p className="text-xl font-heading italic text-slate-900 leading-snug">"Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"</p>
                     </div>
                  </div>
               </div>
            </div>
         </section>
 
-        {/* TESTIMONIALS SECTION - NEW DARK BLUE BACKGROUND */}
+        {/* TESTIMONIALS SECTION - DARK BLUE BACKGROUND */}
         <section id="testimonials" className="py-32 px-6 md:px-12 bg-slate-950 text-white border-y border-white/5">
           <div className="max-w-[1400px] mx-auto">
             <div className="text-center mb-24 reveal">
@@ -479,20 +459,16 @@ export default function App() {
               <h2 className="text-4xl md:text-6xl font-heading text-white tracking-tighter uppercase mb-4">Client <span className="text-[#CC0000]">Voices</span></h2>
               <p className="text-slate-400 uppercase font-black text-[10px] tracking-[0.4em]">Excellence verified by your neighbors</p>
             </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {testimonials.map((t, i) => (
                 <div key={i} className="bg-slate-900 p-12 shadow-2xl rounded-sm border-t-4 border-[#CC0000] reveal hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex space-x-1 mb-8">
-                    {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} className="text-[#CC0000] fill-[#CC0000]" />)}
+                    {[...Array(t.rating)].map((_, index) => <Star key={index} size={14} className="text-[#CC0000] fill-[#CC0000]" />)}
                   </div>
                   <p className="text-lg text-slate-300 italic mb-10 leading-relaxed">"{t.text}"</p>
                   <div className="flex items-center space-x-4 border-t border-white/5 pt-8">
-                    <div className="w-10 h-10 bg-[#CC0000] flex items-center justify-center text-white text-xs font-black rounded-full uppercase">{t.name.split(' ')[0][0]}</div>
-                    <div>
-                      <p className="text-sm font-black text-white uppercase tracking-tight">{t.name}</p>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.location}</p>
-                    </div>
+                    <div className="w-10 h-10 bg-[#CC0000] flex items-center justify-center text-white text-xs font-black rounded-full uppercase">{t.name[0]}</div>
+                    <div><p className="text-sm font-black text-white uppercase tracking-tight">{t.name}</p><p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.location}</p></div>
                   </div>
                 </div>
               ))}
@@ -500,19 +476,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* CTA FOR INSTANT QUOTE POP-OUT */}
-        <section id="quote-cta" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
-          <div className="max-w-4xl mx-auto text-center reveal">
-            <Sparkles size={64} className="text-[#CC0000] mx-auto mb-10 animate-pulse" />
-            <h2 className="text-4xl lg:text-7xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Ready for a <span className="text-[#CC0000]">Closer View?</span></h2>
-            <p className="text-xl text-slate-500 font-light mb-16 max-w-2xl mx-auto">Get a tailored estimate for your peninsula property using our intelligent dispatch engine.</p>
-            <button 
-              onClick={() => setIsQuoteModalOpen(true)}
-              className="bg-slate-950 text-white px-16 py-8 text-[11px] font-black uppercase tracking-[0.8em] hover:bg-[#CC0000] transition-all shadow-2xl group relative overflow-hidden"
-            >
-              Launch Estimate Tool <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" />
-            </button>
-          </div>
+        {/* INSTANT QUOTE CTA */}
+        <section className="py-40 px-6 md:px-12 bg-white text-center reveal">
+          <Sparkles size={64} className="text-[#CC0000] mx-auto mb-10 animate-pulse" />
+          <h2 className="text-4xl lg:text-7xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Tailored <span className="text-[#CC0000]">Estimate</span></h2>
+          <p className="text-xl text-slate-500 font-light mb-16 max-w-2xl mx-auto">Launch our dispatch engine for a personalized service quote for your Peninsula property.</p>
+          <button onClick={() => setIsQuoteModalOpen(true)} className="bg-slate-950 text-white px-16 py-8 text-[11px] font-black uppercase tracking-[0.8em] hover:bg-[#CC0000] transition-all shadow-2xl group overflow-hidden">
+            Open Quote Tool <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" />
+          </button>
         </section>
 
         {/* SERVICE AREAS SECTION */}
@@ -520,13 +491,13 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
              <div>
                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
-                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} loading="lazy" alt="AWC Service Map - Coverage area in the Bay Area" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200'; }} />
+                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} loading="lazy" alt="AWC Service Map" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" />
              </div>
              <div className="grid grid-cols-2 gap-y-4 gap-x-10">
                 {serviceLocations.map((location) => (
                    <div key={location} className="flex items-center space-x-5 border-b border-white/5 pb-3 group hover:border-[#CC0000] transition-colors">
                       <div className="w-2 h-2 bg-[#CC0000] rounded-full scale-0 group-hover:scale-100 transition-all"></div>
-                      <span className="text-xl md:text-2xl font-heading italic text-white/60 group-hover:text-white transition-colors leading-none tracking-tight">{location}</span>
+                      <span className="text-xl md:text-2xl font-heading italic text-white/60 group-hover:text-white leading-none tracking-tight">{location}</span>
                    </div>
                 ))}
              </div>
@@ -539,7 +510,7 @@ export default function App() {
              <CreditCard size={80} className="text-[#CC0000] mx-auto mb-10 opacity-30" />
              <h2 className="text-4xl md:text-6xl font-heading mb-8 uppercase italic tracking-tighter leading-none">Payments</h2>
              <p className="text-white/60 mb-16 text-xl font-light leading-relaxed italic font-sans">"Providing simplified, secure billing for our partners"</p>
-             <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group" aria-label="Access secure payment portal">
+             <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group">
                Secure Portal Access <ChevronRight className="inline-block ml-3 group-hover:translate-x-2 transition-transform" />
              </button>
            </div>
@@ -549,10 +520,9 @@ export default function App() {
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div className="flex flex-col items-start max-w-sm">
-               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo - Serving the community since 1946" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" />
                <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
-            
             <div className="flex flex-col space-y-10">
                <nav className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
                   <a href="#services" className="hover:text-[#CC0000] transition-colors">Services</a>
@@ -563,12 +533,9 @@ export default function App() {
                <div className="h-px w-full bg-white/5"></div>
                <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-3xl lg:text-5xl font-heading font-black text-white hover:text-[#CC0000] transition-all tracking-tighter leading-none" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
             </div>
-
             <div className="flex items-center space-x-6">
               {['Licensed', 'Bonded', 'Insured'].map(tag => (
-                <div key={tag} className="px-5 py-2 border border-white/10 bg-white/5 text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 cursor-default">
-                  {tag}
-                </div>
+                <div key={tag} className="px-5 py-2 border border-white/10 bg-white/5 text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 cursor-default">{tag}</div>
               ))}
             </div>
           </div>
@@ -583,80 +550,43 @@ export default function App() {
       {isQuoteModalOpen && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setIsQuoteModalOpen(false)}></div>
-          <div className="relative bg-white w-full max-w-5xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500">
-            <button 
-              className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" 
-              onClick={() => setIsQuoteModalOpen(false)}
-            >
-              <X size={40} strokeWidth={1} />
-            </button>
-
+          <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500">
+            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" onClick={() => setIsQuoteModalOpen(false)} aria-label="Close"><X size={40} strokeWidth={1} /></button>
             <div className="p-8 md:p-20">
               <div className="mb-16 border-b border-slate-100 pb-10">
-                <div className="flex items-center space-x-4 mb-4">
-                  <FileText className="text-[#CC0000]" size={24} />
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Step {quoteStep} of 3</span>
-                </div>
+                <div className="flex items-center space-x-4 mb-4"><FileText className="text-[#CC0000]" size={24} /><span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Step {quoteStep} of 3</span></div>
                 <h3 className="text-4xl font-heading font-black tracking-tighter text-slate-950 uppercase leading-none">Instant Estimate</h3>
               </div>
-
               <form onSubmit={handleQuoteSubmit}>
-                {/* STEP 1: LINEAR SERVICES LIST */}
                 {quoteStep === 1 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">1. Select Required Services (Multi-select)</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {services.map(s => (
-                        <button
-                          key={s.id}
-                          type="button"
-                          onClick={() => handleQuoteToggle(s.id)}
-                          className={`group flex items-center p-6 border rounded-sm transition-all text-left ${quoteState.services.includes(s.id) ? 'bg-[#CC0000] border-[#CC0000] text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-slate-600 hover:border-[#CC0000]'}`}
-                        >
-                          <div className={`p-2 rounded-sm mr-4 transition-colors ${quoteState.services.includes(s.id) ? 'bg-white/10 text-white' : 'bg-white text-[#CC0000] group-hover:bg-[#CC0000] group-hover:text-white'}`}>
-                            <s.icon size={20} />
-                          </div>
+                        <button key={s.id} type="button" onClick={() => handleQuoteToggle(s.id)} className={`group flex items-center p-6 border rounded-sm transition-all text-left ${quoteState.services.includes(s.id) ? 'bg-[#CC0000] border-[#CC0000] text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-slate-600 hover:border-[#CC0000]'}`}>
+                          <div className={`p-2 rounded-sm mr-4 transition-colors ${quoteState.services.includes(s.id) ? 'bg-white/10 text-white' : 'bg-white text-[#CC0000] group-hover:bg-[#CC0000] group-hover:text-white'}`}><s.icon size={20} /></div>
                           <span className="text-xs font-black uppercase tracking-widest">{s.title}</span>
                         </button>
                       ))}
                     </div>
-                    <div className="mt-16 flex justify-end">
-                      <button type="button" disabled={quoteState.services.length === 0} onClick={() => setQuoteStep(2)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button>
-                    </div>
+                    <div className="mt-16 flex justify-end"><button type="button" disabled={quoteState.services.length === 0} onClick={() => setQuoteStep(2)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button></div>
                   </div>
                 )}
-
-                {/* STEP 2: PROPERTY INFO */}
                 {quoteStep === 2 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">2. Property Details</p>
                     <div className="space-y-12">
-                      <div className="flex space-x-6">
-                        {['residential', 'commercial'].map(type => (
-                          <button
-                            key={type}
-                            type="button"
-                            onClick={() => setQuoteState(p => ({...p, propertyType: type}))}
-                            className={`flex-1 flex flex-col items-center justify-center p-12 border rounded-sm transition-all ${quoteState.propertyType === type ? 'bg-slate-950 border-slate-950 text-white shadow-xl' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'}`}
-                          >
-                            {type === 'residential' ? <Home size={32} className="mb-4" /> : <Briefcase size={32} className="mb-4" />}
-                            <span className="text-xs font-black uppercase tracking-[0.3em]">{type}</span>
-                          </button>
-                        ))}
-                      </div>
-                      <div className="relative">
-                        <MapPin size={20} className="absolute left-6 top-6 text-slate-300" />
-                        <textarea required rows="3" className="w-full bg-slate-50 border-none p-6 pl-16 focus:ring-2 focus:ring-[#CC0000] transition-all font-bold text-slate-900 text-lg rounded-sm" placeholder="Service Address (Peninsula Service Areas Only)" value={quoteState.address} onChange={e => setQuoteState(p => ({...p, address: e.target.value}))}></textarea>
-                      </div>
+                      <div className="flex space-x-6">{['residential', 'commercial'].map(type => (
+                        <button key={type} type="button" onClick={() => setQuoteState(p => ({...p, propertyType: type}))} className={`flex-1 flex flex-col items-center justify-center p-12 border rounded-sm transition-all ${quoteState.propertyType === type ? 'bg-slate-950 border-slate-950 text-white shadow-xl' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'}`}>
+                          {type === 'residential' ? <Home size={32} className="mb-4" /> : <Briefcase size={32} className="mb-4" />}
+                          <span className="text-xs font-black uppercase tracking-[0.3em]">{type}</span>
+                        </button>
+                      ))}</div>
+                      <div className="relative"><MapPin size={20} className="absolute left-6 top-6 text-slate-300" /><textarea required rows="3" className="w-full bg-slate-50 border-none p-6 pl-16 focus:ring-2 focus:ring-[#CC0000] transition-all font-bold text-slate-900 text-lg rounded-sm" placeholder="Service Address (Peninsula Only)" value={quoteState.address} onChange={e => setQuoteState(p => ({...p, address: e.target.value}))}></textarea></div>
                     </div>
-                    <div className="mt-16 flex justify-between">
-                      <button type="button" onClick={() => setQuoteStep(1)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
-                      <button type="button" disabled={!quoteState.address} onClick={() => setQuoteStep(3)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button>
-                    </div>
+                    <div className="mt-16 flex justify-between"><button type="button" onClick={() => setQuoteStep(1)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button><button type="button" disabled={!quoteState.address} onClick={() => setQuoteStep(3)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button></div>
                   </div>
                 )}
-
-                {/* STEP 3: CONTACT */}
                 {quoteStep === 3 && (
                   <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900 mb-10">3. Contact Verification</p>
@@ -665,13 +595,9 @@ export default function App() {
                        <input required type="email" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm" placeholder="Email Address" value={quoteState.email} onChange={e => setQuoteState(p => ({...p, email: e.target.value}))} />
                        <input required type="tel" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm md:col-span-2" placeholder="Phone Number" value={quoteState.phone} onChange={e => setQuoteState(p => ({...p, phone: e.target.value}))} />
                     </div>
-                    <div className="mt-16 flex justify-between items-center">
-                      <button type="button" onClick={() => setQuoteStep(2)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
+                    <div className="mt-16 flex justify-between items-center"><button type="button" onClick={() => setQuoteStep(2)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
                       {formSubmitted ? (
-                        <div className="bg-[#CC0000] text-white px-10 py-5 rounded-sm flex items-center space-x-4 animate-in zoom-in">
-                          <CheckCircle size={20} />
-                          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Transmission Success</span>
-                        </div>
+                        <div className="bg-[#CC0000] text-white px-10 py-5 rounded-sm flex items-center space-x-4 animate-in zoom-in"><CheckCircle size={20} /><span className="text-[10px] font-black uppercase tracking-[0.3em]">Transmission Success</span></div>
                       ) : (
                         <button type="submit" disabled={!quoteState.name || !quoteState.email || !quoteState.phone} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl group">Submit Request <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" /></button>
                       )}
@@ -689,103 +615,35 @@ export default function App() {
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setSelectedService(null)}></div>
           <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500 grid grid-cols-1 lg:grid-cols-2 items-start h-full">
-            <button 
-              className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" 
-              onClick={() => setSelectedService(null)}
-              aria-label="Close Modal"
-            >
-              <X size={40} strokeWidth={1} />
-            </button>
-            
-            {/* CONTENT PANEL (LEFT) */}
+            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)} aria-label="Close"><X size={40} strokeWidth={1} /></button>
             <div className="p-12 md:p-24 bg-white text-left order-2 lg:order-1 flex flex-col justify-center min-h-full">
-              <div className="flex items-center space-x-10 mb-10">
-                <div className="text-[#CC0000]"><selectedService.icon size={40} strokeWidth={1.5} /></div>
-                <div className="h-px w-16 bg-slate-100"></div>
-              </div>
-              
+              <div className="flex items-center space-x-10 mb-10"><div className="text-[#CC0000]"><selectedService.icon size={40} strokeWidth={1.5} /></div><div className="h-px w-16 bg-slate-100"></div></div>
               <h3 className="text-4xl md:text-5xl font-heading font-black mb-10 tracking-tighter text-slate-950 uppercase leading-none">{selectedService.title}</h3>
-              
               <div className="space-y-6 mb-12">
-                 {selectedService.longDesc ? (
-                   selectedService.longDesc.map((para, i) => (
+                 {selectedService.longDesc ? selectedService.longDesc.map((para, i) => (
                      <p key={i} className={`text-lg leading-relaxed text-slate-600 font-sans ${para.startsWith('•') ? 'pl-4' : ''}`}>
-                       {para.includes('**') ? (
-                         <>
-                           {para.split('**')[0]}
-                           <strong className="text-slate-900">{para.split('**')[1]}</strong>
-                           {para.split('**')[2]}
-                         </>
-                       ) : para}
+                       {para.includes('**') ? (<>{para.split('**')[0]}<strong className="text-slate-900">{para.split('**')[1]}</strong>{para.split('**')[2]}</>) : para}
                      </p>
-                   ))
-                 ) : (
-                   <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
-                 )}
+                   )) : <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
+                 }
               </div>
-
-              <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl" aria-label="Request immediate service dispatch">Immediate Dispatch</button>
+              <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl">Immediate Dispatch</button>
             </div>
-
-            {/* VISUAL PANEL */}
             <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
                <div className="w-full max-w-4xl space-y-12">
-                  {selectedService.videoUrl ? (
-                    <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
-                      <iframe 
-                        width="100%" 
-                        height="100%" 
-                        src={selectedService.videoUrl} 
-                        title={`${selectedService.title} Video Documentation`}
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  ) : selectedService.localVideo ? (
-                    <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
-                       <video 
-                         src={`/images/${selectedService.localVideo}`} 
-                         controls 
-                         className="w-full h-full object-cover"
-                         title={`${selectedService.title} Local Footage`}
-                       />
-                    </div>
-                  ) : null}
-
-                  {selectedService.extraImages && selectedService.extraImages.map((img, i) => (
-                    <div key={i} className="w-full flex flex-col items-center">
-                       <img 
-                         src={`/images/${img}`} 
-                         alt={`${selectedService.title} Detail ${i + 1}`} 
-                         loading="lazy"
-                         className="w-full h-auto rounded-sm shadow-2xl border border-white/5" 
-                       />
-                    </div>
-                  ))}
-                  
-                  {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && (
-                    <div className="flex flex-col items-center text-center">
-                      <LucideHistory size={300} className="text-white/5 mb-8" />
-                      <div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em] group-hover/vid:tracking-[1.5em] transition-all duration-700">AWC TECHNICAL LOG</div>
-                    </div>
-                  )}
+                  {selectedService.videoUrl ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><iframe width="100%" height="100%" src={selectedService.videoUrl} title="Video" frameBorder="0" allowFullScreen></iframe></div> : selectedService.localVideo ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><video src={`/images/${selectedService.localVideo}`} controls className="w-full h-full object-cover" /></div> : null}
+                  {selectedService.extraImages && selectedService.extraImages.map((img, i) => <img key={i} src={`/images/${img}`} alt="Detail" loading="lazy" className="w-full h-auto rounded-sm shadow-2xl border border-white/5" />)}
+                  {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && <div className="flex flex-col items-center text-center"><LucideHistory size={300} className="text-white/5 mb-8" /><div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em]">AWC TECHNICAL LOG</div></div>}
                </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* MOBILE NAV OVERLAY */}
+      {/* MOBILE NAV */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-slate-950 z-[200] flex flex-col items-center justify-center p-20 text-center animate-in fade-in duration-300">
-          <button 
-            className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" 
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close Mobile Menu"
-          >
-            <X size={56} strokeWidth={1} />
-          </button>
+          <button className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" onClick={() => setIsMenuOpen(false)} aria-label="Close Menu"><X size={56} strokeWidth={1} /></button>
           <div className="space-y-8">
             {['Services', 'Heritage', 'About', 'Areas'].map(link => (
               <a key={link} href={`#${link.toLowerCase()}`} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all" onClick={() => setIsMenuOpen(false)}>{link}</a>
@@ -793,26 +651,33 @@ export default function App() {
             <button onClick={() => { setIsQuoteModalOpen(true); setIsMenuOpen(false); }} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all">Quote</button>
           </div>
           <div className="mt-24 pt-10 border-t border-white/10 w-full max-w-sm text-center">
-             <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
+             <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white">{phoneLiteral}</a>
           </div>
         </div>
       )}
 
       <style dangerouslySetInnerHTML={{ __html: `
+        /* Font fix: @import removed as font link was added to index.html */
+        
         html { 
           scroll-behavior: smooth; 
           scroll-padding-top: 100px; 
         }
+        
         .font-sans { font-family: 'Figtree', sans-serif; }
         .font-heading { font-family: 'Archivo', sans-serif; }
+        
         body { background-color: #FFFFFF; }
+        
         @keyframes reveal {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
+
         .reveal {
           animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
         .animate-in { animation: fade-in 1.2s forwards; }
       `}} />
