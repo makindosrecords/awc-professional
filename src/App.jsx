@@ -33,8 +33,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V51 (Video Hero Build)
+ * AWC Air Duct and Window Cleaning - Production V58 (Final Full Restoration)
  * Identity: 1946 Heritage / Frediani Family Lineage
+ * Status: Baseline Fully Restored including Hero, Authority, Mastery, and Footer
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -51,6 +52,7 @@ const SocialSVG = {
 const IMAGE_MAP = {
   LOGO: "AWC-red-logo-2x3[35897]_pdf.avif",
   HERO_VIDEO: "hero_video.mp4",
+  HERO_POSTER: "office_depot_window_cleaning.avif",
   FAMILY: "awc_family.avif",
   TEAM: "awc_team.avif",
   VAN: "awc_van.avif",
@@ -77,7 +79,6 @@ const IMAGE_MAP = {
   HOUSE_2: "house_washing_2.avif"
 };
 
-// --- FLOATING LOWER-LEFT SOCIAL BAR ---
 const FloatingSocials = ({ links }) => (
   <div className="fixed bottom-10 left-10 z-[100] flex flex-col space-y-4">
     {[
@@ -88,13 +89,7 @@ const FloatingSocials = ({ links }) => (
       { icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
       { icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
     ].map((item, i) => (
-      <a 
-        key={i}
-        href={item.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex items-center"
-      >
+      <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
         <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
           <div className="absolute inset-0 rounded-full group-hover:animate-ping bg-[#CC0000]/20 opacity-0 group-hover:opacity-100"></div>
           <item.icon />
@@ -119,7 +114,7 @@ export default function App() {
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
       setScrollProgress(currentProgress);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -180,14 +175,10 @@ export default function App() {
       localVideo: "pressure_cleaning.mp4",
       longDesc: [
         "Add value and life to your investment with AWC’s pressure washing services. We can help you:",
-        "**SAVE MONEY.**",
-        "Extend the life of your paint on your house and decks by pressure washing.",
-        "**STAY SAFE.**",
-        "Remove dangerous and slippery mold, mildew, stains, and dirt easily to ensure the safety of your family, friends, and pets.",
-        "**GAIN CURBSIDE LUSTER AND BACKYARD APPEAL.**",
-        "Bring sidewalks, driveways, decks, patios, and patio furniture back to life. Sanding and sealing of decks are services we can also provide.",
-        "**LOVE YOUR HOME.**",
-        "See the “before and after” difference that we’re sure you’ll love.",
+        "**SAVE MONEY.** Extend the life of your paint on your house and decks by pressure washing.",
+        "**STAY SAFE.** Remove dangerous and slippery mold, mildew, stains, and dirt easily to ensure the safety of your family, friends, and pets.",
+        "**GAIN CURBSIDE LUSTER AND BACKYARD APPEAL.** Bring sidewalks, driveways, decks, patios, and patio furniture back to life. Sanding and sealing of decks are services we can also provide.",
+        "**LOVE YOUR HOME.** See the “before and after” difference that we’re sure you’ll love.",
         "For a bigger impact, have your windows cleaned after pressure washing!"
       ]
     },
@@ -200,12 +191,9 @@ export default function App() {
       extraImages: [IMAGE_MAP.GUTTER_1, IMAGE_MAP.GUTTER_2],
       longDesc: [
         "Prevent water damage and protect your home's foundation with AWC's professional gutter cleaning services. Clogged gutters can lead to wood rot, mold growth, and expensive structural repairs.",
-        "**DEBRIS REMOVAL.**",
-        "Our team meticulously removes leaves, silt, and obstacles by hand and with specialized high-reach vacuum systems to ensure your gutters are entirely clear.",
-        "**SYSTEM FLUSHING.**",
-        "We flush your entire system to verify that downspouts are flowing freely and directing water away from your property as designed.",
-        "**SAFETY FIRST.**",
-        "Using professional-grade ladders with protective stand-offs, we reach even the most difficult gutter lines without damaging your shingles or siding.",
+        "**DEBRIS REMOVAL.** Our team meticulously removes leaves, silt, and obstacles by hand and with specialized high-reach vacuum systems to ensure your gutters are entirely clear.",
+        "**SYSTEM FLUSHING.** We flush your entire system to verify that downspouts are flowing freely and directing water away from your property as designed.",
+        "**SAFETY FIRST.** Using professional-grade ladders with protective stand-offs, we reach even the most difficult gutter lines without damaging your shingles or siding.",
         "Regular maintenance is the key to longevity. Ask about our seasonal cleaning programs to keep your home protected year-round."
       ]
     },
@@ -214,7 +202,7 @@ export default function App() {
       title: "Dryer Vent Cleaning", 
       icon: Wind, 
       img: IMAGE_MAP.SERVICE_5_DRYER, 
-      desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention.",
+      desc: "Critical maintenance ensuring laundry safety, efficiency, and fire prevention.", 
       videoUrl: "https://www.youtube.com/embed/iuUXuGMimYo",
       longDesc: [
         "We can help increase the efficiency of your clothes dryer and prevent possible hazardous internal fires in your dryer with air duct cleaning of your dryer vents. Ask us about special pricing of this service."
@@ -225,11 +213,10 @@ export default function App() {
       title: "Solar Panel Cleaning", 
       icon: Sun, 
       img: IMAGE_MAP.SERVICE_6_SOLAR, 
-      desc: "Purified water cleaning for peak electrical efficiency of your solar arrays.",
+      desc: "Purified water cleaning for peak electrical efficiency of your solar arrays.", 
       extraImages: [IMAGE_MAP.SOLAR_1],
       longDesc: [
-        "Dirt, dust, pollen, grime, and bird droppings can affect the output of your solar panels by 20 percent. How often should you clean these depends on what angle they are sloped on and how much rainfall you get.",
-        "We can get them back to maximum output for you with the safe use of our **water fed pole** system."
+        "Dirt, dust, pollen, grime, and bird droppings can affect the output of your solar panels by 20 percent. How often should you clean these depends on what angle they are sloped on and how much rainfall you get. We can get them back to maximum output for you with the safe use of our water fed pole system."
       ]
     },
     { 
@@ -237,11 +224,10 @@ export default function App() {
       title: "Deck Cleaning & Restoration", 
       icon: LucideLayout, 
       img: IMAGE_MAP.SERVICE_7_DECK, 
-      desc: "Deep wood cleaning and restoration to enhance outdoor longevity.",
+      desc: "Deep wood cleaning and restoration to enhance outdoor longevity.", 
       extraImages: [IMAGE_MAP.DECK_1],
       longDesc: [
-        "Clean your deck and handrails to get the wood back to looking new again! Depending on the job, we will use a pressure washer to get the debris off your deck or use the **Soft Wash method**.",
-        "Either way, after the cleaning process is complete, we also offer an additional service of sanding and sealing your deck and rails."
+        "Clean your deck and handrails to get the wood back to looking new again! Depending on the job, we will use a pressure washer to get the debris off your deck or use the Soft Wash method. Either way, after the cleaning process is complete, we also offer an additional service of sanding and sealing your deck and rails."
       ]
     },
     { 
@@ -249,11 +235,10 @@ export default function App() {
       title: "House & Building Washing", 
       icon: Building2, 
       img: IMAGE_MAP.SERVICE_8_HOUSE, 
-      desc: "Comprehensive exterior washing from soft-wash to high-pressure.",
+      desc: "Comprehensive exterior washing from soft-wash to high-pressure.", 
       extraImages: [IMAGE_MAP.HOUSE_1, IMAGE_MAP.HOUSE_2],
       longDesc: [
-        "Gain curbside appeal and save money on painting your entire house by having it washed by one of our experts. We use two different methods of washing.",
-        "We can pressure wash the house or use the **Soft Wash method**. Either one will bring the exterior of your home or business back to life!",
+        "Gain curbside appeal and save money on painting your entire house by having it washed by one of our experts. We use two different methods of washing. We can pressure wash the house or use the Soft Wash method. Either one will bring the exterior of your home or business back to life!",
         "See what a difference pressure washing can make and improve your curb appeal."
       ]
     },
@@ -262,7 +247,7 @@ export default function App() {
       title: "Light Fixture Cleaning", 
       icon: Zap, 
       img: IMAGE_MAP.SERVICE_9_LIGHT, 
-      desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures.",
+      desc: "Detail-oriented hand cleaning for luxury estate chandeliers and fixtures.", 
       extraImages: [IMAGE_MAP.SERVICE_9_LIGHT],
       longDesc: [
         "Whether it’s indoor or outdoor, an intricate chandelier or a basic light fixture let AWC get it nice and sparkly for you!"
@@ -273,8 +258,8 @@ export default function App() {
       title: "Mirror Cleaning", 
       icon: Star, 
       img: IMAGE_MAP.SERVICE_10_MIRROR, 
-      desc: "Streak-free polishing for gym mirrors and custom residential glass.",
-      extraImages: [IMAGE_MAP.LOGO], // Reverting to Logo or relevant image as previous hero image is gone
+      desc: "Streak-free polishing for gym mirrors and custom residential glass.", 
+      extraImages: [IMAGE_MAP.LOGO],
       longDesc: [
         "Bathrooms, closet doors, or mirrors that hang on your wall. Get the haze and peanut butter finger prints off them so you can see that beautiful face of yours nice and clear!"
       ]
@@ -284,17 +269,14 @@ export default function App() {
       title: "Soft Washing & Roof Washing", 
       icon: Droplets, 
       img: IMAGE_MAP.SERVICE_11_ROOF, 
-      desc: "Safe, low-pressure chemical cleaning for roof algae and moss.",
+      desc: "Safe, low-pressure chemical cleaning for roof algae and moss.", 
       localVideo: "soft_washing.mp4",
       longDesc: [
-        "Don’t let dirt and grime stick to the exterior of your property. While pressure washing is ideal for dramatic results on concrete, brick, and other hard surfaces with tough, aged stains, soft washing is perfect for gentle cleaning that avoids potential damage to exteriors.",
-        "Freshen up the look of your building and remove potentially hazardous organic growth with a soft wash treatment.",
-        "**THE METHOD.**",
+        "Don’t let dirt and grime stick to the exterior of your property. While pressure washing is ideal for dramatic results on concrete, brick, and other hard surfaces with tough, aged stains, soft washing is perfect for gentle cleaning that avoids potential damage to exteriors. Freshen up the look of your building and remove potentially hazardous organic growth with a soft wash treatment.",
         "Soft wash is a new cleaning method created to cleanse delicate outdoor surfaces. It’s been popular on the East Coast and in the United Kingdom due to its long-lasting cleaning power.",
-        "Not all surfaces can survive a powerful pressure wash, including shingle roofs and ornamental trellis. Soft washing doesn’t depend on force to lift dirt. Instead, it uses a controlled application of water mixed with cleaning solution to create a deep clean.",
-        "**PROTECTION.**",
-        "The cleaning solution used in soft washing targets organic growth like moss, mold, mildew, and lichen. It kills the surface buildup of fungi while also killing the root of the organism. Soft wash eliminates the spores embedded inside an exterior surface, preventing regrowth and keeping surfaces cleaner longer.",
-        "Dirt and potential allergen-causing growth will be gone. Throw a backyard party or read a book on the patio without worrying over what’s lurking on the building’s exterior."
+        "Not all surfaces can survive a powerful pressure wash, including shingle roofs and ornamental trellis. Soft washing doesn’t depend on force to lift dirt. Instead, it uses a controlled application of water mixed with cleaning solution to create a deep clean. Protect the lifetime of exterior paint and other building materials by opting for a soft wash.",
+        "The cleaning solution used in soft washing targets organic growth like moss, mold, mildew, and lichen. It kills the surface buildup of fungi while also killing the root of the organism. Pressure washing removes surface growth, but soft wash goes a step further. Soft wash eliminates the spores embedded inside an exterior surface, preventing regrowth and keeping surfaces cleaner longer.",
+        "Enjoy your property’s beautiful outdoor living spaces after a soft wash treatment. Dirt and potential allergen-causing growth will be gone. Throw a backyard party or read a book on the patio without worrying over what’s lurking on the building’s exterior."
       ]
     },
     { 
@@ -302,25 +284,21 @@ export default function App() {
       title: "Fogging Service", 
       icon: Wind, 
       img: IMAGE_MAP.SERVICE_12_FOGGING, 
-      desc: "Industrial sanitization fogging for complete interior environment purification.",
+      desc: "Industrial sanitization fogging for complete interior environment purification.", 
       videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU",
       longDesc: [
-        "For businesses and residences, we use the same equipment that is used by the US Military, hospitals, and the airline industry.",
-        "Applying a fog spray to an entire area within a matter of minutes can help reduce the risk of spread of viruses and germs. The product we use is on the EPA’s list of known solutions to use to effectively treat COVID-19. We can use these anti-microbial foggers just about anywhere from classrooms to your home office.",
-        "**NOTE.**",
-        "While this is not a foolproof solution to sanitizing your establishment, it is an approved method that can help your home or business. We do not guarantee that your environment will be 100% free of viruses, bacteria or mold after service is complete. However, we can be sure to work with our equipment and sanitizers to their maximum capabilities, ensuring your space is safer and cleaner than before AWC serviced it."
+        "For businesses and residences, we use the same equipment that is used by the US Military, hospitals, and the airline industry. Applying a fog spray to an entire area within a matter of minutes can help reduce the risk of spread of viruses and germs. The product we use is on the EPA’s list of known solutions to use to effectively treat COVID-19. We can use these anti-microbial foggers just about anywhere from classrooms to your home office. While this is not a foolproof solution to sanitizing your establishment, it is an approved method that can help your home or business.",
+        "We do not guarantee that your environment will be 100% free of viruses, bacteria or mold after service is complete. However, we can be sure to work with our equipment and sanitizers to their maximum capabilities, ensuring your space is safer and cleaner than before AWC serviced it."
       ]
     }
   ], []);
 
   return (
     <div className="bg-white text-slate-900 font-sans selection:bg-[#CC0000] selection:text-white overflow-x-hidden min-h-screen">
-      {/* SCROLL PROGRESS INDICATOR */}
       <div className="fixed top-0 left-0 h-1 bg-[#CC0000] z-[100] transition-all duration-300" style={{ width: `${scrollProgress}%` }}></div>
       
       <FloatingSocials links={socialLinks} />
 
-      {/* FIXED NAVIGATION */}
       <header className="bg-white/95 backdrop-blur-xl border-b border-slate-100 fixed top-0 left-0 right-0 z-[60] shadow-sm transition-all duration-300">
         <div className="max-w-[1600px] mx-auto px-10 py-4 flex justify-between items-center">
           <div className="relative w-48 h-16 flex items-center">
@@ -356,18 +334,17 @@ export default function App() {
         </div>
       </header>
 
-      {/* MAIN CONTENT */}
       <main className="pt-28">
         
-        {/* HERO SECTION - VIDEO BACKGROUND */}
+        {/* HERO SECTION */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
-            {/* HERO VIDEO IMPLEMENTATION */}
             <video
               autoPlay
               muted
               loop
               playsInline
+              poster={`/images/${IMAGE_MAP.HERO_POSTER}`}
               className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
             >
               <source src={`/images/${IMAGE_MAP.HERO_VIDEO}`} type="video/mp4" />
@@ -380,7 +357,7 @@ export default function App() {
                <img 
                  src={`/images/${IMAGE_MAP.LOGO}`} 
                  alt="" 
-                 className="h-64 w-auto mb-6 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-4 duration-1000" 
+                 className="h-64 w-auto mb-6 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in" 
                />
                <div className="flex items-center space-x-8 mb-6">
                 <div className="h-0.5 w-12 bg-[#CC0000]"></div>
@@ -423,16 +400,12 @@ export default function App() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {services.map((s, idx) => (
-                <div 
-                  key={s.id} 
-                  onClick={() => setSelectedService(s)} 
-                  className="group relative bg-white cursor-pointer overflow-visible transition-all duration-700 reveal"
-                  style={{ animationDelay: `${idx * 0.1}s` }}
-                >
+                <div key={s.id} onClick={() => setSelectedService(s)} className="group relative bg-white cursor-pointer overflow-visible transition-all duration-700 reveal">
                   <div className="relative aspect-[2/3] overflow-hidden shadow-xl rounded-sm">
                     <img 
                       src={`/images/${s.img}`} 
                       alt={s.title} 
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                       onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800'; }} 
                     />
@@ -455,30 +428,22 @@ export default function App() {
         </section>
 
         {/* HERITAGE SECTION */}
-        <section id="heritage" className="py-40 px-6 md:px-12 bg-[#FAFAFA] overflow-hidden relative border-b border-slate-100">
-          <div className="max-w-[1400px] mx-auto relative z-10">
-             <div className="flex flex-col lg:flex-row gap-16 items-center reveal">
-               <div className="w-full lg:w-1/2">
-                  <div className="relative group">
-                     <div className="absolute -inset-6 border-[12px] border-white -z-10 rotate-[-1deg] shadow-sm"></div>
-                     <img 
-                      src={`/images/${IMAGE_MAP.FAMILY}`} 
-                      className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" 
-                      alt="The Frediani Family" 
-                      onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }}
-                     />
-                  </div>
-                  <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000]">
-                    <LucideHistory size={40} className="text-[#CC0000] mb-6" />
-                    <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
-                    <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-500">Three Generations of Excellence</p>
-                  </div>
+        <section id="heritage" className="py-40 px-6 md:px-12 bg-[#FAFAFA] border-b border-slate-100 reveal">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative group">
+               <div className="absolute -inset-6 border-[12px] border-white -z-10 rotate-[-1deg] shadow-sm"></div>
+               <img src={`/images/${IMAGE_MAP.FAMILY}`} loading="lazy" className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" alt="The Frediani Family" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} />
+               <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000]">
+                 <LucideHistory size={40} className="text-[#CC0000] mb-6" />
+                 <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
+                 <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-500">Three Generations of Excellence</p>
                </div>
-               <div className="w-full lg:w-1/2 lg:pl-10">
-                 <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90 reveal">
-                   Heritage
-                 </h2>
-                 <div className="space-y-10 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans reveal">
+            </div>
+            <div className="lg:pl-10">
+              <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">
+                Heritage
+              </h2>
+              <div className="space-y-10 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans reveal">
                    <p className="relative">
                      <span className="text-6xl md:text-8xl font-black text-[#CC0000] float-left mr-6 leading-[0.7] mt-3 select-none">F</span>
                      or three generations, dating back to 1946, <strong>AWC Air Duct & Window Cleaning</strong> has proudly served the Bay Area with exceptional care and quality. 
@@ -487,8 +452,7 @@ export default function App() {
                      As a family-owned business, we prioritize exceptional customer service, guaranteeing punctuality, tidiness, and a consistently courteous approach.
                    </p>
                  </div>
-               </div>
-             </div>
+            </div>
           </div>
         </section>
 
@@ -511,6 +475,7 @@ export default function App() {
               <div className="relative group reveal">
                  <img 
                    src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} 
+                   loading="lazy"
                    className="w-full h-auto shadow-[0_30px_80px_-15px_rgba(0,0,0,0.8)] border border-white/5 rounded-sm relative z-10" 
                    alt="Mastery Proof"
                    onError={(e) => { e.currentTarget.style.display = 'none'; }} 
@@ -552,6 +517,7 @@ export default function App() {
                        <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[#CC0000] -translate-y-2 translate-x-2"></div>
                        <img 
                          src={`/images/${IMAGE_MAP.TEAM}`} 
+                         loading="lazy"
                          className="w-full h-auto shadow-2xl rounded-sm relative z-10 border border-slate-50" 
                          alt="AWC Authority"
                          onError={(e) => { e.currentTarget.style.display = 'none'; }} 
@@ -569,49 +535,29 @@ export default function App() {
         </section>
 
         {/* SERVICE AREAS SECTION */}
-        <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white overflow-hidden relative border-b border-white/5">
-           <div className="max-w-[1400px] mx-auto relative z-10">
-              <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-10 reveal">
-                 <div className="text-left">
-                    <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white">Service <span className="text-[#CC0000]">Areas</span></h2>
-                 </div>
-                 <div className="flex items-center space-x-4 text-[#CC0000] mb-4">
-                    <MapPin size={24} />
-                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40">Dispatch Log</span>
-                 </div>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                 <div className="relative group reveal">
-                    <img 
-                      src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} 
-                      alt="AWC Service Areas Map" 
-                      className="w-full h-auto shadow-2xl border border-white/10 rounded-sm relative z-10" 
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-                    />
-                 </div>
-
-                 <div className="grid grid-cols-2 gap-y-4 gap-x-10 reveal">
-                    {serviceLocations.map((location) => (
-                       <div key={location} className="flex items-center space-x-5 group border-b border-white/5 pb-3 hover:border-[#CC0000] transition-colors">
-                          <div className="w-2 h-2 bg-[#CC0000] rounded-full opacity-40 group-hover:opacity-100 transition-all scale-0 group-hover:scale-100 flex-shrink-0"></div>
-                          <span className="text-xl md:text-2xl font-heading italic text-white/60 group-hover:text-white transition-colors leading-none tracking-tight">{location}</span>
-                       </div>
-                    ))}
-                 </div>
-              </div>
-           </div>
+        <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white reveal">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+             <div>
+                <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
+                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} loading="lazy" alt="AWC Service Map" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200'; }} />
+             </div>
+             <div className="grid grid-cols-2 gap-y-4 gap-x-10">
+                {serviceLocations.map((location) => (
+                   <div key={location} className="flex items-center space-x-5 border-b border-white/5 pb-3 group hover:border-[#CC0000] transition-colors">
+                      <div className="w-2 h-2 bg-[#CC0000] rounded-full scale-0 group-hover:scale-100 transition-all"></div>
+                      <span className="text-xl md:text-2xl font-heading italic text-white/60 group-hover:text-white transition-colors leading-none tracking-tight">{location}</span>
+                   </div>
+                ))}
+             </div>
+          </div>
         </section>
 
         {/* PAYMENTS SECTION */}
-        <section id="payments" className="py-32 px-12 bg-white relative">
-           <div className="max-w-4xl mx-auto bg-slate-900 text-white p-20 md:p-32 text-center relative overflow-hidden shadow-2xl reveal border-t-8 border-[#CC0000]">
-             <div className="absolute top-0 left-0 w-full h-2.5 bg-[#CC0000]"></div>
+        <section id="payments" className="py-32 px-12 bg-white reveal">
+           <div className="max-w-4xl mx-auto bg-slate-900 text-white p-20 md:p-32 text-center relative shadow-2xl border-t-8 border-[#CC0000]">
              <CreditCard size={80} className="text-[#CC0000] mx-auto mb-10 opacity-30" />
-             <h2 className="text-4xl md:text-6xl font-heading mb-8 tracking-tighter leading-none uppercase italic">Payments</h2>
-             <p className="text-white/60 mb-16 text-xl font-light leading-relaxed max-w-xl mx-auto italic font-sans">
-               "Providing simplified, secure billing for our residential and commercial partners"
-             </p>
+             <h2 className="text-4xl md:text-6xl font-heading mb-8 uppercase italic tracking-tighter leading-none">Payments</h2>
+             <p className="text-white/60 mb-16 text-xl font-light leading-relaxed italic font-sans">"Providing simplified, secure billing for our residential and commercial partners"</p>
              <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group">
                Secure Portal Access <ChevronRight className="inline-block ml-3 group-hover:translate-x-2 transition-transform" />
              </button>
@@ -656,83 +602,83 @@ export default function App() {
       {selectedService && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setSelectedService(null)}></div>
-          <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in fade-in zoom-in duration-500">
-            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-20 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)}><X size={40} strokeWidth={1} /></button>
-            <div className="grid grid-cols-1 lg:grid-cols-2 items-start h-full">
-              {/* CONTENT PANEL (LEFT) */}
-              <div className="p-12 md:p-24 bg-white text-left order-2 lg:order-1 flex flex-col justify-center min-h-full">
-                <div className="flex items-center space-x-10 mb-10">
-                  <div className="text-[#CC0000]"><selectedService.icon size={40} strokeWidth={1.5} /></div>
-                  <div className="h-px w-16 bg-slate-100"></div>
-                </div>
-                
-                <h3 className="text-4xl md:text-5xl font-heading font-black mb-10 tracking-tighter text-slate-950 uppercase leading-none">{selectedService.title}</h3>
-                
-                <div className="space-y-6 mb-12">
-                   {selectedService.longDesc ? (
-                     selectedService.longDesc.map((para, i) => (
-                       <p key={i} className={`text-lg leading-relaxed text-slate-600 font-sans ${para.startsWith('•') ? 'pl-4' : ''}`}>
-                         {para.includes('**') ? (
-                           <>
-                             {para.split('**')[0]}
-                             <strong className="text-slate-900">{para.split('**')[1]}</strong>
-                             {para.split('**')[2]}
-                           </>
-                         ) : para}
-                       </p>
-                     ))
-                   ) : (
-                     <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
-                   )}
-                </div>
-
-                <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl">Immediate Dispatch</button>
+          <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500 grid grid-cols-1 lg:grid-cols-2 items-start h-full">
+            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)}><X size={40} strokeWidth={1} /></button>
+            
+            {/* CONTENT PANEL (LEFT) */}
+            <div className="p-12 md:p-24 bg-white text-left order-2 lg:order-1 flex flex-col justify-center min-h-full">
+              <div className="flex items-center space-x-10 mb-10">
+                <div className="text-[#CC0000]"><selectedService.icon size={40} strokeWidth={1.5} /></div>
+                <div className="h-px w-16 bg-slate-100"></div>
+              </div>
+              
+              <h3 className="text-4xl md:text-5xl font-heading font-black mb-10 tracking-tighter text-slate-950 uppercase leading-none">{selectedService.title}</h3>
+              
+              <div className="space-y-6 mb-12">
+                 {selectedService.longDesc ? (
+                   selectedService.longDesc.map((para, i) => (
+                     <p key={i} className={`text-lg leading-relaxed text-slate-600 font-sans ${para.startsWith('•') ? 'pl-4' : ''}`}>
+                       {para.includes('**') ? (
+                         <>
+                           {para.split('**')[0]}
+                           <strong className="text-slate-900">{para.split('**')[1]}</strong>
+                           {para.split('**')[2]}
+                         </>
+                       ) : para}
+                     </p>
+                   ))
+                 ) : (
+                   <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
+                 )}
               </div>
 
-              {/* VISUAL PANEL (VERTICALLY CENTERED ON RIGHT) */}
-              <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
-                 <div className="w-full max-w-4xl space-y-12">
-                    {selectedService.videoUrl ? (
-                      <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
-                        <iframe 
-                          width="100%" 
-                          height="100%" 
-                          src={selectedService.videoUrl} 
-                          title={selectedService.title}
-                          frameBorder="0" 
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                          allowFullScreen
-                        ></iframe>
-                      </div>
-                    ) : selectedService.localVideo ? (
-                      <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
-                         <video 
-                           src={`/images/${selectedService.localVideo}`} 
-                           controls 
-                           className="w-full h-full object-cover"
-                         />
-                      </div>
-                    ) : null}
+              <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl">Immediate Dispatch</button>
+            </div>
 
-                    {/* Support for one or multiple extra images */}
-                    {selectedService.extraImages && selectedService.extraImages.map((img, i) => (
-                      <div key={i} className="w-full flex flex-col items-center">
-                         <img 
-                           src={`/images/${img}`} 
-                           alt={`${selectedService.title} Detail ${i + 1}`} 
-                           className="w-full h-auto rounded-sm shadow-2xl border border-white/5" 
-                         />
-                      </div>
-                    ))}
-                    
-                    {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && (
-                      <div className="flex flex-col items-center text-center">
-                        <LucideHistory size={300} className="text-white/5 mb-8" />
-                        <div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em] group-hover/vid:tracking-[1.5em] transition-all duration-700">AWC TECHNICAL LOG</div>
-                      </div>
-                    )}
-                 </div>
-              </div>
+            {/* VISUAL PANEL (STICKY & VERTICALLY CENTERED ON RIGHT) */}
+            <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
+               <div className="w-full max-w-4xl space-y-12">
+                  {selectedService.videoUrl ? (
+                    <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
+                      <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src={selectedService.videoUrl} 
+                        title={selectedService.title}
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  ) : selectedService.localVideo ? (
+                    <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden">
+                       <video 
+                         src={`/images/${selectedService.localVideo}`} 
+                         controls 
+                         className="w-full h-full object-cover"
+                       />
+                    </div>
+                  ) : null}
+
+                  {/* Support for multi-image stacks */}
+                  {selectedService.extraImages && selectedService.extraImages.map((img, i) => (
+                    <div key={i} className="w-full flex flex-col items-center">
+                       <img 
+                         src={`/images/${img}`} 
+                         alt={`${selectedService.title} Detail ${i + 1}`} 
+                         loading="lazy"
+                         className="w-full h-auto rounded-sm shadow-2xl border border-white/5" 
+                       />
+                    </div>
+                  ))}
+                  
+                  {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && (
+                    <div className="flex flex-col items-center text-center">
+                      <LucideHistory size={300} className="text-white/5 mb-8" />
+                      <div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em] group-hover/vid:tracking-[1.5em] transition-all duration-700">AWC TECHNICAL LOG</div>
+                    </div>
+                  )}
+               </div>
             </div>
           </div>
         </div>
@@ -747,8 +693,7 @@ export default function App() {
               <a key={link} href={`#${link.toLowerCase()}`} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all" onClick={() => setIsMenuOpen(false)}>{link}</a>
             ))}
           </div>
-          <div className="mt-24 pt-10 border-t border-white/10 w-full max-w-sm">
-             <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[#CC0000] mb-5">Dispatch</p>
+          <div className="mt-24 pt-10 border-t border-white/10 w-full max-w-sm text-center">
              <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white">{phoneLiteral}</a>
           </div>
         </div>
@@ -759,7 +704,7 @@ export default function App() {
         
         html { 
           scroll-behavior: smooth; 
-          scroll-padding-top: 100px; /* Ensures fixed header doesn't overlap section titles on scroll */
+          scroll-padding-top: 100px; 
         }
         
         .font-sans { font-family: 'Figtree', sans-serif; }
