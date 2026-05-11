@@ -33,9 +33,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V60 (Accessibility Optimized)
+ * AWC Air Duct and Window Cleaning - Production V61 (SEO & Content Finalization)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Focus: Contrast Ratios + Semantic Labels + Content Integrity
+ * Focus: 100 SEO Score + Dynamic Meta Management + Content Integrity
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -109,6 +109,16 @@ export default function App() {
   const phoneLiteral = "(650) 583-0420";
   
   useEffect(() => {
+    // SEO: Dynamic Meta Description and Title Management
+    document.title = "AWC Air Duct & Window Cleaning | Bay Area Professional Services";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = "description";
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = "Three generations of professional air duct cleaning, window cleaning, and exterior restoration in the Bay Area. Established 1946. Licensed, bonded, and insured.";
+
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
@@ -304,7 +314,7 @@ export default function App() {
           <div className="relative w-48 h-16 flex items-center">
              <img 
                src={`/images/${IMAGE_MAP.LOGO}`} 
-               alt="AWC Logo" 
+               alt="AWC Air Duct and Window Cleaning Company Logo" 
                className="h-44 w-auto cursor-pointer transition-transform hover:scale-110 active:scale-95 absolute left-0 top-[68%] -translate-y-1/2" 
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
                onError={(e) => { e.currentTarget.style.display = 'none'; }} 
@@ -331,7 +341,7 @@ export default function App() {
           <button 
             className="xl:hidden p-2 hover:bg-slate-50 rounded-full" 
             onClick={() => setIsMenuOpen(true)}
-            aria-label="Open Menu"
+            aria-label="Open Mobile Menu"
           >
             <Menu size={32} />
           </button>
@@ -340,7 +350,7 @@ export default function App() {
 
       <main className="pt-28">
         
-        {/* HERO SECTION - RESTORED FULL CONTENT */}
+        {/* HERO SECTION - SEMANTIC H1 */}
         <section className="relative min-h-[65vh] flex items-center bg-slate-950 overflow-hidden px-12 group">
           <div className="absolute inset-0 z-0">
             <video
@@ -348,7 +358,7 @@ export default function App() {
               muted
               loop
               playsInline
-              title="AWC Professional Service Background Video"
+              title="AWC Professional Cleaning Showcase Video"
               poster={`/images/${IMAGE_MAP.HERO_POSTER}`}
               className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
             >
@@ -361,7 +371,7 @@ export default function App() {
             <div className="mb-6 flex flex-col items-center">
                <img 
                  src={`/images/${IMAGE_MAP.LOGO}`} 
-                 alt="" 
+                 alt="AWC Logo - Celebrating 70+ years of quality" 
                  className="h-64 w-auto mb-6 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in" 
                />
                <div className="flex items-center space-x-8 mb-6">
@@ -409,7 +419,7 @@ export default function App() {
                   <div className="relative aspect-[2/3] overflow-hidden shadow-xl rounded-sm">
                     <img 
                       src={`/images/${s.img}`} 
-                      alt={s.title} 
+                      alt={`Service: ${s.title}`} 
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                       onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800'; }} 
@@ -437,7 +447,7 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
                <div className="absolute -inset-6 border-[12px] border-white -z-10 rotate-[-1deg] shadow-sm"></div>
-               <img src={`/images/${IMAGE_MAP.FAMILY}`} loading="lazy" className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" alt="The Frediani Family" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} />
+               <img src={`/images/${IMAGE_MAP.FAMILY}`} loading="lazy" className="relative z-10 w-full h-auto object-cover shadow-2xl border border-slate-200 transition-all duration-1000" alt="The Frediani Family - Three generations of owners" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'; }} />
                <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000]">
                  <LucideHistory size={40} className="text-[#CC0000] mb-6" />
                  <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
@@ -472,7 +482,7 @@ export default function App() {
                  <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
                    "Our service shines through. Meticulous attention to detail ensures your property's glass and ventilation meet the highest standard of clarity"
                  </p>
-                 <button className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all">
+                 <button className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all" aria-label="View our performance archive">
                     <span>Performance Archive</span>
                     <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
                  </button>
@@ -482,7 +492,7 @@ export default function App() {
                    src={`/images/${IMAGE_MAP.BEFORE_AFTER}`} 
                    loading="lazy"
                    className="w-full h-auto shadow-[0_30px_80px_-15px_rgba(0,0,0,0.8)] border border-white/5 rounded-sm relative z-10" 
-                   alt="Mastery Proof"
+                   alt="Mastery Proof - Clear results showcase"
                    onError={(e) => { e.currentTarget.style.display = 'none'; }} 
                  />
                  <div className="absolute -bottom-8 -left-8 bg-white text-slate-900 px-10 py-6 shadow-2xl flex items-center space-x-6 z-20">
@@ -524,7 +534,7 @@ export default function App() {
                          src={`/images/${IMAGE_MAP.TEAM}`} 
                          loading="lazy"
                          className="w-full h-auto shadow-2xl rounded-sm relative z-10 border border-slate-50" 
-                         alt="AWC Authority"
+                         alt="AWC Authority - Our Professional Crew"
                          onError={(e) => { e.currentTarget.style.display = 'none'; }} 
                        />
                     </div>
@@ -544,7 +554,7 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
              <div>
                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
-                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} loading="lazy" alt="AWC Service Map" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200'; }} />
+                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} loading="lazy" alt="AWC Service Map - Coverage area in the Bay Area" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200'; }} />
              </div>
              <div className="grid grid-cols-2 gap-y-4 gap-x-10">
                 {serviceLocations.map((location) => (
@@ -563,29 +573,29 @@ export default function App() {
              <CreditCard size={80} className="text-[#CC0000] mx-auto mb-10 opacity-30" />
              <h2 className="text-4xl md:text-6xl font-heading mb-8 uppercase italic tracking-tighter leading-none">Payments</h2>
              <p className="text-white/60 mb-16 text-xl font-light leading-relaxed italic font-sans">"Providing simplified, secure billing for our partners"</p>
-             <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group">
+             <button className="bg-[#CC0000] text-white px-14 py-7 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-white hover:text-slate-950 transition-all shadow-xl group" aria-label="Access secure payment portal">
                Secure Portal Access <ChevronRight className="inline-block ml-3 group-hover:translate-x-2 transition-transform" />
              </button>
            </div>
         </section>
 
-        {/* FOOTER - FULLY RESTORED & ACCESSIBILITY OPTIMIZED */}
+        {/* FOOTER */}
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div className="flex flex-col items-start max-w-sm">
-               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo - Serving the community since 1946" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
             
             <div className="flex flex-col space-y-10">
-               <div className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
+               <nav className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
                   <a href="#services" className="hover:text-[#CC0000] transition-colors">Services</a>
                   <a href="#heritage" className="hover:text-[#CC0000] transition-colors">Heritage</a>
                   <a href="#about" className="hover:text-[#CC0000] transition-colors">Authority</a>
                   <a href="#areas" className="hover:text-[#CC0000] transition-colors">Areas</a>
-               </div>
+               </nav>
                <div className="h-px w-full bg-white/5"></div>
-               <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-3xl lg:text-5xl font-heading font-black text-white hover:text-[#CC0000] transition-all tracking-tighter leading-none">{phoneLiteral}</a>
+               <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-3xl lg:text-5xl font-heading font-black text-white hover:text-[#CC0000] transition-all tracking-tighter leading-none" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
             </div>
 
             <div className="flex items-center space-x-6">
@@ -643,7 +653,7 @@ export default function App() {
                  )}
               </div>
 
-              <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl">Immediate Dispatch</button>
+              <button className="bg-slate-950 text-white w-full py-10 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all shadow-xl" aria-label="Request immediate service dispatch">Immediate Dispatch</button>
             </div>
 
             {/* VISUAL PANEL (STICKY & VERTICALLY CENTERED ON RIGHT) */}
@@ -702,7 +712,7 @@ export default function App() {
           <button 
             className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" 
             onClick={() => setIsMenuOpen(false)}
-            aria-label="Close Menu"
+            aria-label="Close Mobile Menu"
           >
             <X size={56} strokeWidth={1} />
           </button>
@@ -712,7 +722,7 @@ export default function App() {
             ))}
           </div>
           <div className="mt-24 pt-10 border-t border-white/10 w-full max-w-sm text-center">
-             <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white">{phoneLiteral}</a>
+             <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-2xl font-heading font-black text-white" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
           </div>
         </div>
       )}
