@@ -33,9 +33,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V59 (Performance Finalized)
+ * AWC Air Duct and Window Cleaning - Production V60 (Accessibility Optimized)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Focus: Mobile Optimization + Absolute Content Preservation
+ * Focus: Contrast Ratios + Semantic Labels + Content Integrity
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -114,7 +114,6 @@ export default function App() {
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
       setScrollProgress(currentProgress);
     };
-    // passive: true for mobile scrolling performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -329,7 +328,11 @@ export default function App() {
               </span>
             </div>
           </div>
-          <button className="xl:hidden p-2 hover:bg-slate-50 rounded-full" onClick={() => setIsMenuOpen(true)}>
+          <button 
+            className="xl:hidden p-2 hover:bg-slate-50 rounded-full" 
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open Menu"
+          >
             <Menu size={32} />
           </button>
         </div>
@@ -345,6 +348,7 @@ export default function App() {
               muted
               loop
               playsInline
+              title="AWC Professional Service Background Video"
               poster={`/images/${IMAGE_MAP.HERO_POSTER}`}
               className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
             >
@@ -437,7 +441,7 @@ export default function App() {
                <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000]">
                  <LucideHistory size={40} className="text-[#CC0000] mb-6" />
                  <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
-                 <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-500">Three Generations of Excellence</p>
+                 <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-300">Three Generations of Excellence</p>
                </div>
             </div>
             <div className="lg:pl-10">
@@ -507,7 +511,7 @@ export default function App() {
                             <item.icon className="text-[#CC0000] group-hover/card:scale-110 transition-transform" size={32} />
                             <div>
                                <p className="text-base font-black text-slate-900 uppercase tracking-tight leading-none mb-1">{item.title}</p>
-                               <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">{item.desc}</p>
+                               <p className="text-[10px] uppercase font-bold tracking-widest text-slate-600">{item.desc}</p>
                             </div>
                          </div>
                        ))}
@@ -525,7 +529,7 @@ export default function App() {
                        />
                     </div>
                     <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm">
-                       <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4 italic">Leadership Profile</h4>
+                       <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-500 mb-4 italic">Leadership Profile</h4>
                        <p className="text-xl font-heading italic text-slate-900 leading-snug">
                          "Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"
                        </p>
@@ -565,16 +569,16 @@ export default function App() {
            </div>
         </section>
 
-        {/* FOOTER - FULLY RESTORED */}
+        {/* FOOTER - FULLY RESTORED & ACCESSIBILITY OPTIMIZED */}
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div className="flex flex-col items-start max-w-sm">
                <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-               <p className="text-lg font-heading italic text-slate-500 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
+               <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
             
             <div className="flex flex-col space-y-10">
-               <div className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/30">
+               <div className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
                   <a href="#services" className="hover:text-[#CC0000] transition-colors">Services</a>
                   <a href="#heritage" className="hover:text-[#CC0000] transition-colors">Heritage</a>
                   <a href="#about" className="hover:text-[#CC0000] transition-colors">Authority</a>
@@ -586,13 +590,13 @@ export default function App() {
 
             <div className="flex items-center space-x-6">
               {['Licensed', 'Bonded', 'Insured'].map(tag => (
-                <div key={tag} className="px-5 py-2 border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-[0.4em] text-slate-500 cursor-default">
+                <div key={tag} className="px-5 py-2 border border-white/10 bg-white/5 text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 cursor-default">
                   {tag}
                 </div>
               ))}
             </div>
           </div>
-          <div className="max-w-[1500px] mx-auto mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[8px] font-bold uppercase tracking-[1em] text-slate-800">
+          <div className="max-w-[1500px] mx-auto mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[8px] font-bold uppercase tracking-[1em] text-slate-500">
              <span>© {new Date().getFullYear()} AWC Air Duct & Window Cleaning</span>
              <span className="mt-4 md:mt-0">Peninsula Service Hub</span>
           </div>
@@ -604,7 +608,13 @@ export default function App() {
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setSelectedService(null)}></div>
           <div className="relative bg-white w-full max-w-7xl max-h-[92vh] overflow-y-auto shadow-2xl rounded-sm animate-in zoom-in duration-500 grid grid-cols-1 lg:grid-cols-2 items-start h-full">
-            <button className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" onClick={() => setSelectedService(null)}><X size={40} strokeWidth={1} /></button>
+            <button 
+              className="absolute top-8 right-8 text-slate-400 hover:text-[#CC0000] z-10 transition-all p-3 hover:scale-110" 
+              onClick={() => setSelectedService(null)}
+              aria-label="Close Modal"
+            >
+              <X size={40} strokeWidth={1} />
+            </button>
             
             {/* CONTENT PANEL (LEFT) */}
             <div className="p-12 md:p-24 bg-white text-left order-2 lg:order-1 flex flex-col justify-center min-h-full">
@@ -645,7 +655,7 @@ export default function App() {
                         width="100%" 
                         height="100%" 
                         src={selectedService.videoUrl} 
-                        title={selectedService.title}
+                        title={`${selectedService.title} Video Documentation`}
                         frameBorder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowFullScreen
@@ -657,6 +667,7 @@ export default function App() {
                          src={`/images/${selectedService.localVideo}`} 
                          controls 
                          className="w-full h-full object-cover"
+                         title={`${selectedService.title} Local Footage`}
                        />
                     </div>
                   ) : null}
@@ -688,7 +699,13 @@ export default function App() {
       {/* MOBILE NAV OVERLAY */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-slate-950 z-[200] flex flex-col items-center justify-center p-20 text-center animate-in fade-in duration-300">
-          <button className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" onClick={() => setIsMenuOpen(false)}><X size={56} strokeWidth={1} /></button>
+          <button 
+            className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" 
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close Menu"
+          >
+            <X size={56} strokeWidth={1} />
+          </button>
           <div className="space-y-8">
             {['Services', 'Heritage', 'About', 'Areas', 'Payments'].map(link => (
               <a key={link} href={`#${link.toLowerCase()}`} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all" onClick={() => setIsMenuOpen(false)}>{link}</a>
