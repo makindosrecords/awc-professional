@@ -9,9 +9,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V83 (Syntax & Performance Fix)
+ * AWC Air Duct and Window Cleaning - Production V84 (SEO & Performance Master)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Features: Fixed Social Icon Bug, Centered Branding, Balanced Hero, PageSpeed Optimized
+ * Features: Restored Meta SEO, Centered Branding, Balanced Hero, PageSpeed Optimized
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -67,7 +67,7 @@ const FloatingSocials = ({ links }) => {
         { id: 'yelp', icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
         { id: 'nextdoor', icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
       ].map((item) => {
-        const Icon = item.icon; // FIXED: Assign component to capital variable
+        const Icon = item.icon;
         return (
           <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
             <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
@@ -147,6 +147,16 @@ export default function App() {
   };
 
   useEffect(() => {
+    // RESTORED SEO LOGIC
+    document.title = "AWC Air Duct & Window Cleaning | Bay Area Professional Services";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', "Three generations of professional air duct cleaning, window cleaning, and exterior restoration in the Bay Area. Established 1946. Licensed, bonded, and insured.");
+
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const currentProgress = (window.pageYOffset / totalScroll) * 100;
@@ -323,7 +333,7 @@ export default function App() {
                  <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-300">Three Generations of Excellence</p>
                </div>
             </div>
-            <div className="lg:pl-10">
+            <div className="lg:pl-10 text-left">
               <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">Heritage</h2>
               <div className="space-y-6 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans">
                 <p>
@@ -344,7 +354,7 @@ export default function App() {
         {/* MASTERY SECTION - RESTORED IMAGE CONSTRAINTS */}
         <section className="py-40 px-6 md:px-12 bg-slate-950 text-white overflow-hidden relative">
            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-              <div className="reveal">
+              <div className="reveal text-left">
                  <div className="w-12 h-1.5 bg-[#CC0000] mb-10"></div>
                  <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">Mastery <br/> <span className="text-[#CC0000]">Revealed</span></h2>
                  <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
@@ -377,7 +387,7 @@ export default function App() {
         <section id="about" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
            <div className="max-w-[1400px] mx-auto">
               <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-                 <div className="space-y-12 reveal">
+                 <div className="space-y-12 reveal text-left">
                     <h3 className="text-4xl lg:text-6xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
                     <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light font-sans max-w-lg">
                        We are proud to be active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols and aerial platform systems.
@@ -389,7 +399,7 @@ export default function App() {
                        ].map((item, i) => (
                          <div key={i} className="flex items-center space-x-8 p-8 bg-slate-50 border border-slate-100 rounded-sm hover:border-[#CC0000] transition-all group/card">
                             <item.icon className="text-[#CC0000] group-hover/card:scale-110 transition-transform" size={32} />
-                            <div>
+                            <div className="text-left">
                                <p className="text-base font-black text-slate-900 uppercase tracking-tight leading-none mb-1">{item.title}</p>
                                <p className="text-[10px] uppercase font-bold tracking-widest text-slate-600">{item.desc}</p>
                             </div>
@@ -408,7 +418,7 @@ export default function App() {
                          alt="Professional AWC Crew" 
                        />
                     </div>
-                    <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm group-hover:bg-white transition-colors duration-500">
+                    <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm group-hover:bg-white transition-colors duration-500 text-left">
                        <p className="text-xl font-heading italic text-slate-900 leading-snug">
                          "Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"
                        </p>
@@ -428,7 +438,7 @@ export default function App() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {testimonials.map((t, i) => (
-                <div key={i} className="bg-slate-900 p-12 shadow-2xl rounded-sm border-t-4 border-[#CC0000] reveal hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div key={i} className="bg-slate-900 p-12 shadow-2xl rounded-sm border-t-4 border-[#CC0000] reveal hover:-translate-y-2 transition-transform duration-500 text-left" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex space-x-1 mb-8">
                     {[...Array(t.rating)].map((_, index) => <Star key={index} size={14} className="text-[#CC0000] fill-[#CC0000]" />)}
                   </div>
@@ -456,11 +466,11 @@ export default function App() {
         {/* SERVICE AREAS SECTION */}
         <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white reveal">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-             <div>
+             <div className="text-left">
                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
                 <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} alt="AWC Service Map" width="1200" height="800" loading="lazy" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" />
              </div>
-             <div className="grid grid-cols-2 gap-y-4 gap-x-10">
+             <div className="grid grid-cols-2 gap-y-4 gap-x-10 text-left">
                 {serviceLocations.map((location) => (
                    <div key={location} className="flex items-center space-x-5 border-b border-white/5 pb-3 group hover:border-[#CC0000] transition-colors">
                       <div className="w-2 h-2 bg-[#CC0000] rounded-full scale-0 group-hover:scale-100 transition-all"></div>
@@ -474,11 +484,11 @@ export default function App() {
         {/* FOOTER */}
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
-            <div className="flex flex-col items-start max-w-sm">
+            <div className="flex flex-col items-start max-w-sm text-left">
                <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Footer Logo" width="150" height="150" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" />
                <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
-            <div className="flex flex-col space-y-10">
+            <div className="flex flex-col space-y-10 text-left">
                <nav className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
                   <a href="#services" className="hover:text-[#CC0000] transition-colors">Services</a>
                   <a href="#heritage" className="hover:text-[#CC0000] transition-colors">Heritage</a>
@@ -497,7 +507,7 @@ export default function App() {
         </footer>
       </main>
 
-      {/* INSTANT QUOTE MODAL - COMPLETE RESTORE */}
+      {/* INSTANT QUOTE MODAL */}
       {isQuoteModalOpen && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setIsQuoteModalOpen(false)}></div>
