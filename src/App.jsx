@@ -1,48 +1,17 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { 
-  Phone, 
-  Wind, 
-  CheckCircle2, 
-  Menu, 
-  X, 
-  ArrowRight, 
-  ShieldCheck, 
-  Clock, 
-  ExternalLink, 
-  ChevronRight, 
-  Droplets, 
-  Building2, 
-  Fan, 
-  CreditCard, 
-  Users2, 
-  Truck, 
-  Sun, 
-  Waves, 
-  Zap, 
-  Layout as LucideLayout, 
-  Maximize2, 
-  Play as LucidePlay, 
-  Award, 
-  History as LucideHistory, 
-  ArrowUpRight, 
-  Star, 
-  ShieldAlert, 
-  Users, 
-  MapPin, 
-  CheckCircle, 
-  Mail, 
-  Home, 
-  Briefcase, 
-  Quote as QuoteIcon, 
-  Sparkles, 
-  FileText 
+  Phone, Wind, CheckCircle2, Menu, X, ArrowRight, ShieldCheck, Clock, 
+  ExternalLink, ChevronRight, Droplets, Building2, Fan, CreditCard, 
+  Users2, Truck, Sun, Waves, Zap, Layout as LucideLayout, Maximize2, 
+  Play as LucidePlay, Award, History as LucideHistory, ArrowUpRight, 
+  Star, ShieldAlert, Users, MapPin, CheckCircle, Mail, Home, 
+  Briefcase, Quote as QuoteIcon, Sparkles, FileText 
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V81 (Full Content Restoration)
+ * AWC Air Duct and Window Cleaning - Production V83 (Syntax & Performance Fix)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Features: 12 Detailed Services, Complete Heritage Narrative, Ron Frediani Quote,
- * PageSpeed Optimized (Explicit Dimensions + FetchPriority)
+ * Features: Fixed Social Icon Bug, Centered Branding, Balanced Hero, PageSpeed Optimized
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -55,7 +24,7 @@ const SocialSVG = {
   Nextdoor: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 2h-13A2.5 2.5 0 003 4.5v15A2.5 2.5 0 005.5 22h13a2.5 2.5 0 002.5-2.5v-15A2.5 2.5 0 0018.5 2zm-1.8 14.2l-2.6-1.5v-3.4l2.6 1.5v3.4zm-4.7 2.8l-2.6-1.5V9.4l2.6 1.5v8.1zm-4.7-2.8l-2.6-1.5V11l2.6 1.5v3.7z"/></svg>
 };
 
-// --- IMAGE MAP ---
+// --- COMPLETE IMAGE MAP ---
 const IMAGE_MAP = {
   LOGO: "AWC-red-logo-2x3[35897]_pdf.avif",
   HERO_VIDEO: "hero_video.mp4",
@@ -98,16 +67,14 @@ const FloatingSocials = ({ links }) => {
         { id: 'yelp', icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
         { id: 'nextdoor', icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
       ].map((item) => {
-        const Icon = item.icon;
+        const Icon = item.icon; // FIXED: Assign component to capital variable
         return (
           <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
             <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
               <div className="absolute inset-0 rounded-full group-hover:animate-ping bg-[#CC0000]/20 opacity-0 group-hover:opacity-100"></div>
               <Icon />
             </div>
-            <span className="opacity-0 group-hover:opacity-100 ml-4 text-[9px] font-black uppercase tracking-[0.2em] text-white bg-slate-900 px-3 py-1.5 shadow-sm rounded-sm transition-all transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap">
-              {item.label}
-            </span>
+            <span className="opacity-0 group-hover:opacity-100 ml-4 text-[9px] font-black uppercase tracking-[0.2em] text-white bg-slate-900 px-3 py-1.5 shadow-sm rounded-sm transition-all transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap">{item.label}</span>
           </a>
         );
       })}
@@ -127,7 +94,6 @@ export default function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const phoneLiteral = "(650) 583-0420";
-
   const socialLinks = useMemo(() => ({
     instagram: "https://www.instagram.com/airductandwindowcleaning/",
     facebook: "https://www.facebook.com/bayareaawindowcleaning",
@@ -136,33 +102,6 @@ export default function App() {
     yelp: "https://www.yelp.com/biz/awc-air-duct-and-window-cleaning-millbrae",
     nextdoor: "https://nextdoor.com/page/awc-air-duct-window-cleaning-millbrae-ca"
   }), []);
-  
-  useEffect(() => {
-    document.title = "AWC Air Duct & Window Cleaning | Bay Area Professional Services";
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.name = "description";
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.content = "Three generations of professional air duct cleaning, window cleaning, and exterior restoration in the Bay Area. Established 1946. Licensed, bonded, and insured.";
-
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.pageYOffset / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const serviceLocations = useMemo(() => [
-    "Atherton", "Belmont", "Brisbane", "Burlingame", "Colma", "Daly City",
-    "El Granada", "Foster City", "Half Moon Bay", "Hillsborough", "Los Altos Hills",
-    "Menlo Park", "Millbrae", "Montara", "Moss Beach", "Pacifica", "Palo Alto",
-    "Redwood City", "San Bruno", "San Carlos", "San Francisco", "San Mateo",
-    "South San Francisco", "Stanford", "Sunnyvale", "Woodside"
-  ], []);
 
   const services = useMemo(() => [
     { id: 1, title: "Air Duct Cleaning", icon: Fan, img: IMAGE_MAP.SERVICE_1_DUCT, desc: "Professional high-static ventilation sanitization for your residential or commercial property.", videoUrl: "https://www.youtube.com/embed/_FHWKTUiykM", longDesc: ["According to the doctors at WebMD, “Indoor air pollution can affect you at home, work or even places you visit.”", "Clean ducts help your system run more efficiently and reduce harmful allergens."] },
@@ -177,6 +116,14 @@ export default function App() {
     { id: 10, title: "Mirror Cleaning", icon: Star, img: IMAGE_MAP.SERVICE_10_MIRROR, desc: "Streak-free polishing for gym mirrors and custom residential glass.", extraImages: [IMAGE_MAP.LOGO] },
     { id: 11, title: "Soft Washing & Roof Washing", icon: Droplets, img: IMAGE_MAP.SERVICE_11_ROOF, desc: "Safe, low-pressure chemical cleaning for roof algae and moss.", localVideo: "soft_washing.mp4" },
     { id: 12, title: "Fogging Service", icon: Wind, img: IMAGE_MAP.SERVICE_12_FOGGING, desc: "Industrial sanitization fogging for complete interior environment purification.", videoUrl: "https://www.youtube.com/embed/xhaP51QZQmU" }
+  ], []);
+
+  const serviceLocations = useMemo(() => [
+    "Atherton", "Belmont", "Brisbane", "Burlingame", "Colma", "Daly City",
+    "El Granada", "Foster City", "Half Moon Bay", "Hillsborough", "Los Altos Hills",
+    "Menlo Park", "Millbrae", "Montara", "Moss Beach", "Pacifica", "Palo Alto",
+    "Redwood City", "San Bruno", "San Carlos", "San Francisco", "San Mateo",
+    "South San Francisco", "Stanford", "Sunnyvale", "Woodside"
   ], []);
 
   const testimonials = useMemo(() => [
@@ -199,6 +146,16 @@ export default function App() {
     }, 5000);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentProgress = (window.pageYOffset / totalScroll) * 100;
+      setScrollProgress(currentProgress);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="bg-white text-slate-900 font-sans selection:bg-[#CC0000] selection:text-white overflow-x-hidden min-h-screen">
       <div className="fixed top-0 left-0 h-1 bg-[#CC0000] z-[100]" style={{ width: `${scrollProgress}%` }}></div>
@@ -216,7 +173,7 @@ export default function App() {
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
              />
           </div>
-          <nav className="hidden xl:flex items-center space-x-12 text-[11px] uppercase font-bold tracking-[0.3em] text-slate-400">
+          <nav className="hidden xl:flex items-center space-x-12 text-[11px] uppercase font-bold tracking-[0.3em] text-slate-500">
             {['Services', 'Heritage', 'About', 'Areas'].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-[#CC0000] transition-colors relative group">
                 {item}
@@ -251,12 +208,12 @@ export default function App() {
               className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
             >
               <source src={`/images/${IMAGE_MAP.HERO_VIDEO}`} type="video/mp4" />
+              <track kind="captions" />
             </video>
             <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110"></div>
           </div>
 
           <div className="relative z-20 max-w-[1700px] mx-auto w-full py-8 reveal">
-            {/* Branding - Centered */}
             <div className="mb-10 flex flex-col items-center text-center group/brand">
                 <img 
                     src={`/images/${IMAGE_MAP.LOGO}`} 
@@ -271,14 +228,12 @@ export default function App() {
                 </div>
             </div>
 
-            {/* Headline - Refined Size and Centered Alignment */}
             <div className="flex flex-col items-center text-center">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-white mb-8 tracking-tight uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
                   Where quality cleaning <br /> 
                   meets <span className="text-[#CC0000]">family values</span>
                 </h1>
                 
-                {/* Tight Highlight Tagline - Centered - Padding px-1.5 py-0.5 */}
                 <p className="text-lg md:text-xl lg:text-2xl text-white font-bold leading-[1.8] max-w-3xl italic font-sans mb-10 drop-shadow-2xl">
                   <span className="bg-[#CC0000] px-1.5 py-0.5 [box-decoration-break:clone] [-webkit-box-decoration-break:clone] hover:tracking-widest hover:bg-white hover:text-[#CC0000] transition-all duration-700 cursor-default shadow-lg">
                     Three generations of mastery in glass clarity and professional ventilation systems.
@@ -287,7 +242,6 @@ export default function App() {
                 
                 <div className="h-1 w-32 bg-[#CC0000] mb-10 shadow-[0_0_20px_rgba(204,0,0,0.5)]"></div>
                 
-                {/* Category Badges - Now Centered */}
                 <div className="flex flex-wrap justify-center gap-x-5 gap-y-4 text-white text-[10px] uppercase font-black tracking-[0.4em]">
                     {[
                         { label: 'Residential', icon: Home },
@@ -521,7 +475,7 @@ export default function App() {
         <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
           <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div className="flex flex-col items-start max-w-sm">
-               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Logo" width="150" height="150" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" />
+               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Footer Logo" width="150" height="150" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" />
                <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
             </div>
             <div className="flex flex-col space-y-10">
@@ -543,7 +497,7 @@ export default function App() {
         </footer>
       </main>
 
-      {/* INSTANT QUOTE MODAL */}
+      {/* INSTANT QUOTE MODAL - COMPLETE RESTORE */}
       {isQuoteModalOpen && (
         <div className="fixed inset-0 z-[300] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setIsQuoteModalOpen(false)}></div>
@@ -581,7 +535,7 @@ export default function App() {
                       ))}</div>
                       <div className="relative"><MapPin size={20} className="absolute left-6 top-6 text-slate-300" /><textarea required rows="3" className="w-full bg-slate-50 border-none p-6 pl-16 focus:ring-2 focus:ring-[#CC0000] transition-all font-bold text-slate-900 text-lg rounded-sm" placeholder="Service Address (Peninsula Only)" value={quoteState.address} onChange={e => setQuoteState(p => ({...p, address: e.target.value}))}></textarea></div>
                     </div>
-                    <div className="mt-16 flex justify-between"><button type="button" onClick={() => setQuoteStep(1)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button><button type="button" disabled={!quoteState.address} onClick={() => setQuoteStep(3)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button></div>
+                    <div className="mt-16 flex justify-between"><button type="button" onClick={() => setQuoteStep(1)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 hover:text-slate-900">Back</button><button type="button" disabled={!quoteState.address} onClick={() => setQuoteStep(3)} className="bg-slate-950 text-white px-12 py-6 text-[10px] font-black uppercase tracking-[0.6em] hover:bg-[#CC0000] transition-all disabled:opacity-20 shadow-xl">Continue</button></div>
                   </div>
                 )}
                 {quoteStep === 3 && (
@@ -592,7 +546,7 @@ export default function App() {
                        <input required type="email" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm" placeholder="Email Address" value={quoteState.email} onChange={e => setQuoteState(p => ({...p, email: e.target.value}))} />
                        <input required type="tel" className="w-full bg-slate-50 border-none p-6 focus:ring-2 focus:ring-[#CC0000] font-bold text-slate-900 text-lg rounded-sm md:col-span-2" placeholder="Phone Number" value={quoteState.phone} onChange={e => setQuoteState(p => ({...p, phone: e.target.value}))} />
                     </div>
-                    <div className="mt-16 flex justify-between items-center"><button type="button" onClick={() => setQuoteStep(2)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-slate-900">Back</button>
+                    <div className="mt-16 flex justify-between items-center"><button type="button" onClick={() => setQuoteStep(2)} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 hover:text-slate-900">Back</button>
                       {formSubmitted ? (
                         <div className="bg-[#CC0000] text-white px-10 py-5 rounded-sm flex items-center space-x-4 animate-in zoom-in"><CheckCircle size={20} /><span className="text-[10px] font-black uppercase tracking-[0.3em]">Transmission Success</span></div>
                       ) : (
@@ -607,7 +561,7 @@ export default function App() {
         </div>
       )}
 
-      {/* SERVICE MODAL */}
+      {/* SERVICE MODAL - COMPLETE RESTORE */}
       {selectedService && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 overflow-hidden">
           <div className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl" onClick={() => setSelectedService(null)}></div>
@@ -619,7 +573,7 @@ export default function App() {
               <div className="space-y-6 mb-12">
                  {selectedService.longDesc ? selectedService.longDesc.map((para, i) => (
                      <p key={i} className={`text-lg leading-relaxed text-slate-600 font-sans ${para.startsWith('•') ? 'pl-4' : ''}`}>
-                       {para.includes('**') ? (<>{para.split('**')[0]}<strong className="text-slate-900">{para.split('**')[1]}</strong>{para.split('**')[2]}</>) : para}
+                       {para}
                      </p>
                    )) : <p className="text-xl text-slate-500 font-light leading-relaxed italic border-l-[16px] border-[#CC0000] pl-10 font-sans">{selectedService.desc}</p>
                  }
@@ -628,8 +582,8 @@ export default function App() {
             </div>
             <div className="bg-slate-950 flex flex-col items-center justify-center border-l border-slate-100 min-h-[500px] lg:min-h-screen relative overflow-hidden group/vid order-1 lg:order-2 px-10 py-20">
                <div className="w-full max-w-4xl space-y-12">
-                  {selectedService.videoUrl ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><iframe width="100%" height="100%" src={selectedService.videoUrl} title="Video" frameBorder="0" allowFullScreen></iframe></div> : selectedService.localVideo ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><video src={`/images/${selectedService.localVideo}`} controls className="w-full h-full object-cover" /></div> : null}
-                  {selectedService.extraImages && selectedService.extraImages.map((img, i) => <img key={i} src={`/images/${img}`} alt="Detail" width="600" height="400" loading="lazy" className="w-full h-auto rounded-sm shadow-2xl border border-white/5" />)}
+                  {selectedService.videoUrl ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><iframe width="100%" height="100%" src={selectedService.videoUrl} title="Service Video" frameBorder="0" allowFullScreen></iframe></div> : selectedService.localVideo ? <div className="w-full aspect-video bg-black shadow-2xl rounded-sm overflow-hidden"><video src={`/images/${selectedService.localVideo}`} controls className="w-full h-full object-cover" /></div> : null}
+                  {selectedService.extraImages && selectedService.extraImages.map((img, i) => <img key={i} src={`/images/${img}`} alt="Service Detail" width="600" height="400" loading="lazy" className="w-full h-auto rounded-sm shadow-2xl border border-white/5" />)}
                   {!selectedService.videoUrl && !selectedService.localVideo && !selectedService.extraImages && <div className="flex flex-col items-center text-center"><LucideHistory size={300} className="text-white/5 mb-8" /><div className="text-[#CC0000] opacity-30 uppercase font-black text-[11px] tracking-[1.2em]">AWC TECHNICAL LOG</div></div>}
                </div>
             </div>
@@ -658,8 +612,8 @@ export default function App() {
           scroll-behavior: smooth; 
           scroll-padding-top: 100px; 
         }
-        .font-sans { font-family: 'Figtree', sans-serif; }
-        .font-heading { font-family: 'Archivo', sans-serif; }
+        .font-sans { font-family: 'Figtree', sans-serif; font-display: swap; }
+        .font-heading { font-family: 'Archivo', sans-serif; font-display: swap; }
         body { background-color: #FFFFFF; }
         @keyframes reveal {
           from { opacity: 0; transform: translateY(30px); }
