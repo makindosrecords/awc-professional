@@ -9,9 +9,9 @@ import {
 } from 'lucide-react';
 
 /**
- * AWC Air Duct and Window Cleaning - Production V87 (Fold-Optimized Hero)
+ * AWC Air Duct and Window Cleaning - Production V89 (Typography Expansion)
  * Identity: 1946 Heritage / Frediani Family Lineage
- * Features: Viewport-Optimized Logo & Text, SVG Hero Logo, Restored Meta SEO, PageSpeed Optimized
+ * Features: Larger Section Headings, Massive Hero Logo, Restored Meta SEO, PageSpeed Optimized
  */
 
 // --- STABLE INLINE SOCIAL SVGS ---
@@ -239,7 +239,10 @@ export default function App() {
                 </p>
                 <div className="flex items-center space-x-6 mb-4">
                     <div className="h-0.5 w-12 bg-[#CC0000]"></div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.6em] text-white bg-[#CC0000] px-6 py-2 rounded-sm shadow-2xl">Established 1946</span>
+                    {/* ENLARGED HERITAGE MARKER */}
+                    <span className="text-xs md:text-sm font-black uppercase tracking-[0.5em] text-white bg-[#CC0000] px-6 py-2.5 rounded-sm shadow-2xl">
+                      Established 1946
+                    </span>
                     <div className="h-0.5 w-12 bg-[#CC0000]"></div>
                 </div>
             </div>
@@ -283,7 +286,8 @@ export default function App() {
           <div className="max-w-[1500px] mx-auto">
             <div className="mb-24 border-b border-slate-100 pb-16 flex flex-col md:flex-row md:items-start justify-between gap-10 reveal">
               <div className="text-left max-w-4xl">
-                <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-6">Services</h2>
+                {/* INCREASED HEADER SIZE */}
+                <h2 className="text-5xl md:text-7xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-6">Services</h2>
                 <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed font-sans border-l-2 border-slate-100 pl-8 italic">
                    AWC proudly offers a wide range of professional services. From expert window and air duct cleaning to pressure washing and dryer vent maintenance, we're committed to enhancing the quality of your environment.
                 </p>
@@ -341,7 +345,8 @@ export default function App() {
                </div>
             </div>
             <div className="lg:pl-10 text-left">
-              <h2 className="text-4xl md:text-6xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">Heritage</h2>
+              {/* INCREASED HEADER SIZE */}
+              <h2 className="text-5xl md:text-7xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">Heritage</h2>
               <div className="space-y-6 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans">
                 <p>
                   <span className="text-6xl md:text-8xl font-black text-[#CC0000] float-left mr-6 leading-[0.7] mt-3 select-none">F</span>
@@ -363,7 +368,8 @@ export default function App() {
            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
               <div className="reveal text-left">
                  <div className="w-12 h-1.5 bg-[#CC0000] mb-10"></div>
-                 <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">Mastery <br/> <span className="text-[#CC0000]">Revealed</span></h2>
+                 {/* INCREASED HEADER SIZE */}
+                 <h2 className="text-5xl md:text-7xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">Mastery <br/> <span className="text-[#CC0000]">Revealed</span></h2>
                  <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
                    "Our service shines through. Meticulous attention to detail ensures your property's glass and ventilation meet the highest standard of clarity."
                  </p>
@@ -395,7 +401,8 @@ export default function App() {
            <div className="max-w-[1400px] mx-auto">
               <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
                  <div className="space-y-12 reveal text-left">
-                    <h3 className="text-4xl lg:text-6xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
+                    {/* INCREASED HEADER SIZE */}
+                    <h3 className="text-5xl lg:text-7xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
                     <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light font-sans max-w-lg">
                        We are proud to be active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols and aerial platform systems.
                     </p>
@@ -440,7 +447,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto">
             <div className="text-center mb-24 reveal">
               <QuoteIcon size={48} className="text-[#CC0000]/40 mx-auto mb-6" />
-              <h2 className="text-4xl md:text-6xl font-heading text-white tracking-tighter uppercase mb-4">Client <span className="text-[#CC0000]">Voices</span></h2>
+              {/* INCREASED HEADER SIZE */}
+              <h2 className="text-5xl md:text-7xl font-heading text-white tracking-tighter uppercase mb-4">Client <span className="text-[#CC0000]">Voices</span></h2>
               <p className="text-slate-400 uppercase font-black text-[10px] tracking-[0.4em]">Excellence verified by your neighbors</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -463,7 +471,8 @@ export default function App() {
         {/* INSTANT QUOTE CTA */}
         <section className="py-40 px-6 md:px-12 bg-white text-center reveal">
           <Sparkles size={64} className="text-[#CC0000] mx-auto mb-10 animate-pulse" />
-          <h2 className="text-4xl lg:text-7xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Tailored <span className="text-[#CC0000]">Estimate</span></h2>
+          {/* INCREASED HEADER SIZE */}
+          <h2 className="text-5xl lg:text-8xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Tailored <span className="text-[#CC0000]">Estimate</span></h2>
           <p className="text-xl text-slate-500 font-light mb-16 max-w-2xl mx-auto">Launch our dispatch engine for a personalized service quote for your Peninsula property.</p>
           <button onClick={() => setIsQuoteModalOpen(true)} className="bg-slate-950 text-white px-16 py-8 text-[11px] font-black uppercase tracking-[0.8em] hover:bg-[#CC0000] transition-all shadow-xl group overflow-hidden">
             Open Quote Tool <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" />
@@ -474,7 +483,8 @@ export default function App() {
         <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white reveal">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
              <div className="text-left">
-                <h2 className="text-4xl md:text-6xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
+                {/* INCREASED HEADER SIZE */}
+                <h2 className="text-5xl md:text-7xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
                 <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} alt="AWC Service Map" width="1200" height="800" loading="lazy" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" />
              </div>
              <div className="grid grid-cols-2 gap-y-4 gap-x-10 text-left">
@@ -523,7 +533,8 @@ export default function App() {
             <div className="p-8 md:p-20 text-left">
               <div className="mb-16 border-b border-slate-100 pb-10">
                 <div className="flex items-center space-x-4 mb-4"><FileText className="text-[#CC0000]" size={24} /><span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Step {quoteStep} of 3</span></div>
-                <h3 className="text-4xl font-heading font-black tracking-tighter text-slate-950 uppercase leading-none">Instant Estimate</h3>
+                {/* INCREASED MODAL HEADER */}
+                <h3 className="text-5xl font-heading font-black tracking-tighter text-slate-950 uppercase leading-none">Instant Estimate</h3>
               </div>
               <form onSubmit={handleQuoteSubmit}>
                 {quoteStep === 1 && (
