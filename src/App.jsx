@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { 
   Phone, Wind, CheckCircle2, Menu, X, ArrowRight, ShieldCheck, Clock, 
   ExternalLink, ChevronRight, Droplets, Building2, Fan, CreditCard, 
@@ -7,6 +7,17 @@ import {
   Star, ShieldAlert, Users, MapPin, CheckCircle, Mail, Home, 
   Briefcase, Quote as QuoteIcon, Sparkles, FileText 
 } from 'lucide-react';
+
+import Hero from './components/Hero.jsx';
+
+const Services = lazy(() => import('./components/Services.jsx'));
+const Heritage = lazy(() => import('./components/Heritage.jsx'));
+const Mastery = lazy(() => import('./components/Mastery.jsx'));
+const Authority = lazy(() => import('./components/Authority.jsx'));
+const Testimonials = lazy(() => import('./components/Testimonials.jsx'));
+const Cta = lazy(() => import('./components/Cta.jsx'));
+const Areas = lazy(() => import('./components/Areas.jsx'));
+const Footer = lazy(() => import('./components/Footer.jsx'));
 
 /**
  * AWC Air Duct and Window Cleaning - Production V89 (Typography Expansion)
@@ -83,11 +94,33 @@ const FloatingSocials = ({ links }) => {
   );
 };
 
+const ScrollProgressBar = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const currentProgress = (window.pageYOffset / totalScroll) * 100;
+          setScrollProgress(currentProgress);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return <div className="fixed top-0 left-0 h-1 bg-[#CC0000] z-[100]" style={{ width: `${scrollProgress}%` }}></div>;
+};
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [quoteStep, setQuoteStep] = useState(1);
   const [quoteState, setQuoteState] = useState({
     services: [], propertyType: 'residential', name: '', email: '', phone: '', address: ''
@@ -157,19 +190,11 @@ export default function App() {
       document.head.appendChild(metaDesc);
     }
     metaDesc.setAttribute('content', "Three generations of professional air duct cleaning, window cleaning, and exterior restoration in the Bay Area. Established 1946. Licensed, bonded, and insured.");
-
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.pageYOffset / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="bg-white text-slate-900 font-sans selection:bg-[#CC0000] selection:text-white overflow-x-hidden min-h-screen">
-      <div className="fixed top-0 left-0 h-1 bg-[#CC0000] z-[100]" style={{ width: `${scrollProgress}%` }}></div>
+      <ScrollProgressBar />
       
       <FloatingSocials links={socialLinks} />
 
@@ -206,322 +231,19 @@ export default function App() {
 
       <main className="pt-28">
         
-        {/* HERO SECTION - VIEWPORT OPTIMIZED CONTENT */}
-        <section className="relative min-h-[90vh] flex items-center bg-slate-950 overflow-hidden px-6 md:px-12 group">
-          <div className="absolute inset-0 z-0">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              fetchpriority="high"
-              poster={`/images/${IMAGE_MAP.HERO_POSTER}`}
-              className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
-            >
-              <source src={`/images/${IMAGE_MAP.HERO_VIDEO}`} type="video/mp4" />
-              <track kind="captions" />
-            </video>
-            <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110"></div>
-          </div>
+        <Hero imageMap={IMAGE_MAP} />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-[#CC0000] text-sm font-black uppercase tracking-[0.4em] animate-pulse">Loading Content...</div></div>}>
+          <Services services={services} setSelectedService={setSelectedService} />
+          <Heritage imageMap={IMAGE_MAP} />
 
-          <div className="relative z-20 max-w-[1700px] mx-auto w-full py-4 reveal">
-            {/* Branding - Sized to fit above the fold */}
-            <div className="mb-6 flex flex-col items-center text-center group/brand">
-                <img 
-                    src={`/images/${IMAGE_MAP.HERO_LOGO_SVG}`} 
-                    alt="AWC Hero Logo SVG" 
-                    width="320" height="320"
-                    className="h-56 md:h-[320px] w-auto mb-1 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in transition-transform duration-700 group-hover/brand:scale-105" 
-                />
-                {/* Slogan - White Text */}
-                <p className="text-white text-lg md:text-2xl font-heading font-black tracking-[0.2em] uppercase mb-4 drop-shadow-lg">
-                    Air Duct & Window Cleaning
-                </p>
-                <div className="flex items-center space-x-6 mb-4">
-                    <div className="h-0.5 w-12 bg-[#CC0000]"></div>
-                    {/* ENLARGED HERITAGE MARKER */}
-                    <span className="text-xs md:text-sm font-black uppercase tracking-[0.5em] text-white bg-[#CC0000] px-6 py-2.5 rounded-sm shadow-2xl">
-                      Established 1946
-                    </span>
-                    <div className="h-0.5 w-12 bg-[#CC0000]"></div>
-                </div>
-            </div>
+          <Mastery imageMap={IMAGE_MAP} setIsQuoteModalOpen={setIsQuoteModalOpen} />
+          <Authority imageMap={IMAGE_MAP} />
+          <Testimonials testimonials={testimonials} />
+          <Cta setIsQuoteModalOpen={setIsQuoteModalOpen} />
+          <Areas imageMap={IMAGE_MAP} serviceLocations={serviceLocations} />
 
-            <div className="flex flex-col items-center text-center">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-white mb-6 tracking-tight uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
-                  Where quality cleaning <br /> 
-                  meets <span className="text-[#CC0000]">family values</span>
-                </h1>
-                
-                {/* Highlight Tagline */}
-                <p className="text-lg md:text-xl lg:text-2xl text-white font-bold leading-[1.6] max-w-3xl italic font-sans mb-8 drop-shadow-2xl">
-                  <span className="bg-[#CC0000] px-1.5 py-0.5 [box-decoration-break:clone] [-webkit-box-decoration-break:clone] hover:tracking-widest hover:bg-white hover:text-[#CC0000] transition-all duration-700 cursor-default shadow-lg">
-                    Three generations of mastery in glass clarity and professional ventilation systems.
-                  </span>
-                </p>
-                
-                <div className="h-1 w-32 bg-[#CC0000] mb-8 shadow-[0_0_20px_rgba(204,0,0,0.5)]"></div>
-                
-                <div className="flex flex-wrap justify-center gap-x-5 gap-y-4 text-white text-[10px] uppercase font-black tracking-[0.4em]">
-                    {[
-                        { label: 'Residential', icon: Home },
-                        { label: 'Commercial', icon: Building2 },
-                        { label: 'Industrial', icon: Zap },
-                        { label: 'Services', icon: CheckCircle2 }
-                    ].map((item, i) => (
-                        <div key={i} className="flex items-center">
-                            <span className="bg-[#CC0000] px-3 py-1 rounded-sm flex items-center space-x-3 shadow-xl drop-shadow-lg hover:-translate-y-1 hover:bg-white hover:text-[#CC0000] transition-all duration-300 group/badge cursor-default">
-                                <item.icon size={12} className="group-hover/badge:scale-110 transition-transform" /> 
-                                <span>{item.label}</span>
-                            </span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SERVICES SECTION */}
-        <section id="services" className="py-32 px-12 bg-white relative border-y border-slate-100">
-          <div className="max-w-[1500px] mx-auto">
-            <div className="mb-24 border-b border-slate-100 pb-16 flex flex-col md:flex-row md:items-start justify-between gap-10 reveal">
-              <div className="text-left max-w-4xl">
-                {/* INCREASED HEADER SIZE */}
-                <h2 className="text-5xl md:text-7xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-6">Services</h2>
-                <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed font-sans border-l-2 border-slate-100 pl-8 italic">
-                   AWC proudly offers a wide range of professional services. From expert window and air duct cleaning to pressure washing and dryer vent maintenance, we're committed to enhancing the quality of your environment.
-                </p>
-              </div>
-              <Award size={48} strokeWidth={1} className="text-[#CC0000] hidden md:block" />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {services.map((s) => (
-                <div key={s.id} onClick={() => setSelectedService(s)} className="group relative bg-white cursor-pointer overflow-visible transition-all duration-700 reveal">
-                  <div className="relative aspect-[2/3] overflow-hidden shadow-xl rounded-sm">
-                    <img 
-                      src={`/images/${s.img}`} 
-                      alt={`Service: ${s.title}`} 
-                      width="400" height="600"
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                      onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800'; }} 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end text-left">
-                      <div className="w-10 h-10 bg-white/10 backdrop-blur-lg border border-white/20 flex items-center justify-center rounded-full text-white mb-4 group-hover:bg-[#CC0000] transition-colors">
-                        <s.icon size={18} />
-                      </div>
-                      <h3 className="text-2xl font-heading font-black text-white leading-none uppercase tracking-tight mb-2">{s.title}</h3>
-                      <div className="h-0.5 w-0 group-hover:w-full bg-[#CC0000] transition-all duration-500 mb-4"></div>
-                      <p className="text-slate-300 text-[11px] font-light leading-relaxed max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
-                        {s.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* HERITAGE SECTION - RESTORED FULL NARRATIVE */}
-        <section id="heritage" className="py-40 px-6 md:px-12 bg-[#FAFAFA] border-b border-slate-100 reveal">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative group">
-               <div className="absolute inset-0 border-4 border-[#CC0000] opacity-0 group-hover:opacity-100 group-hover:-inset-4 transition-all duration-500 -z-10"></div>
-               <div className="overflow-hidden shadow-2xl rounded-sm border border-slate-200">
-                 <img 
-                   src={`/images/${IMAGE_MAP.FAMILY}`} 
-                   alt="The Frediani Family Owners" 
-                   width="700" height="500"
-                   loading="lazy" 
-                   className="relative z-10 w-full h-auto object-cover transition-all duration-1000 group-hover:scale-105" 
-                 />
-               </div>
-               <div className="mt-8 bg-slate-950 text-white p-10 shadow-2xl border-l-[12px] border-[#CC0000] group-hover:translate-x-4 transition-transform duration-700">
-                 <LucideHistory size={40} className="text-[#CC0000] mb-6" />
-                 <p className="text-2xl font-heading italic leading-tight text-white mb-6">"Established in 1946 by Frank Frediani"</p>
-                 <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-slate-300">Three Generations of Excellence</p>
-               </div>
-            </div>
-            <div className="lg:pl-10 text-left">
-              {/* INCREASED HEADER SIZE */}
-              <h2 className="text-5xl md:text-7xl font-heading text-[#CC0000] tracking-tighter leading-none uppercase mb-12 opacity-90">Heritage</h2>
-              <div className="space-y-6 text-slate-600 text-lg md:text-xl leading-relaxed font-light font-sans">
-                <p>
-                  <span className="text-6xl md:text-8xl font-black text-[#CC0000] float-left mr-6 leading-[0.7] mt-3 select-none">F</span>
-                  or three generations, dating back to 1946, <strong>AWC Air Duct & Window Cleaning</strong> has proudly served the Bay Area with exceptional care and quality.
-                </p>
-                <p>
-                  It all began with the vision of founder <strong>Frank Frediani</strong>, continued by his son <strong>Ron</strong>, who transitioned from a role in San Francisco's Window Cleaners Union to help lead AWC. Today, Ron and his wife Carol, along with their son Joe, own and operate AWC. 
-                </p>
-                <p>
-                  As a family-owned business, we prioritize exceptional customer service, guaranteeing punctuality, tidiness, and a consistently courteous approach.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* MASTERY SECTION - RESTORED IMAGE CONSTRAINTS */}
-        <section className="py-40 px-6 md:px-12 bg-slate-950 text-white overflow-hidden relative">
-           <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-              <div className="reveal text-left">
-                 <div className="w-12 h-1.5 bg-[#CC0000] mb-10"></div>
-                 {/* INCREASED HEADER SIZE */}
-                 <h2 className="text-5xl md:text-7xl font-heading tracking-tighter leading-[1.1] mb-12 uppercase italic">Mastery <br/> <span className="text-[#CC0000]">Revealed</span></h2>
-                 <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed italic font-heading border-l-[12px] border-[#CC0000]/40 pl-10 mb-16">
-                   "Our service shines through. Meticulous attention to detail ensures your property's glass and ventilation meet the highest standard of clarity."
-                 </p>
-                 <button onClick={() => setIsQuoteModalOpen(true)} className="group flex items-center space-x-8 text-white font-black uppercase tracking-[0.4em] text-[10px] py-4 px-8 border border-white/10 hover:bg-[#CC0000] hover:border-[#CC0000] transition-all">
-                    <span>Request Clarity</span>
-                    <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
-                 </button>
-              </div>
-              <div className="relative group reveal flex justify-center lg:justify-end">
-                 <div className="max-w-xl w-full overflow-hidden rounded-sm border border-white/5 relative z-10 before:content-[''] before:absolute before:top-0 before:-left-[100%] before:w-1/2 before:h-full before:bg-white/20 before:skew-x-[-25deg] group-hover:before:left-[150%] before:transition-all before:duration-1000 before:z-20">
-                   <img 
-                     src={`/images/${IMAGE_MAP.WINDOW_LADDER}`} 
-                     alt="Professional Equipment Mastery" 
-                     width="600" height="800"
-                     loading="lazy" 
-                     className="w-full h-auto transition-all duration-1000 group-hover:scale-110 group-hover:brightness-125 object-cover" 
-                   />
-                 </div>
-                 <div className="absolute -bottom-8 -left-8 bg-white text-slate-900 px-10 py-6 shadow-2xl flex items-center space-x-6 z-20 group-hover:-translate-y-2 transition-transform duration-500">
-                    <div className="p-3 bg-slate-950 text-[#CC0000] rounded-full"><Maximize2 size={24} /></div>
-                    <span className="text-sm font-black uppercase tracking-[0.3em]">Proven Results</span>
-                 </div>
-              </div>
-           </div>
-        </section>
-
-        {/* AUTHORITY SECTION - RESTORED FULL CERTIFICATIONS & TEAM QUOTE */}
-        <section id="about" className="py-40 px-6 md:px-12 bg-white relative overflow-hidden">
-           <div className="max-w-[1400px] mx-auto">
-              <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-                 <div className="space-y-12 reveal text-left">
-                    {/* INCREASED HEADER SIZE */}
-                    <h3 className="text-5xl lg:text-7xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
-                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light font-sans max-w-lg">
-                       We are proud to be active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols and aerial platform systems.
-                    </p>
-                    <div className="grid grid-cols-1 gap-5">
-                       {[
-                         { icon: ShieldCheck, title: "Liability & Workers' Comp", desc: "Full Comprehensive Protection" },
-                         { icon: Award, title: "Aerial Platform Certified", desc: "Specialized High-Reach Systems" }
-                       ].map((item, i) => (
-                         <div key={i} className="flex items-center space-x-8 p-8 bg-slate-50 border border-slate-100 rounded-sm hover:border-[#CC0000] transition-all group/card">
-                            <item.icon className="text-[#CC0000] group-hover/card:scale-110 transition-transform" size={32} />
-                            <div className="text-left">
-                               <p className="text-base font-black text-slate-900 uppercase tracking-tight leading-none mb-1">{item.title}</p>
-                               <p className="text-[10px] uppercase font-bold tracking-widest text-slate-600">{item.desc}</p>
-                            </div>
-                         </div>
-                       ))}
-                    </div>
-                 </div>
-                 <div className="space-y-10 reveal group">
-                    <div className="relative overflow-hidden rounded-sm shadow-2xl border border-slate-50">
-                       <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-[#CC0000] -translate-y-2 translate-x-2 z-20 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700"></div>
-                       <img 
-                         src={`/images/${IMAGE_MAP.TEAM}`} 
-                         loading="lazy" 
-                         width="600" height="400"
-                         className="w-full h-auto relative z-10 transition-all duration-1000 group-hover:scale-105 group-hover:rotate-[-0.5deg]" 
-                         alt="Professional AWC Crew" 
-                       />
-                    </div>
-                    <div className="bg-slate-50 p-10 border-l-[10px] border-[#CC0000] shadow-sm group-hover:bg-white transition-colors duration-500 text-left">
-                       <p className="text-xl font-heading italic text-slate-900 leading-snug">
-                         "Ron Frediani serves on the Board of the Millbrae Chamber of Commerce and is a past president of the Millbrae Lions Club"
-                       </p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </section>
-
-        {/* TESTIMONIALS SECTION */}
-        <section id="testimonials" className="py-32 px-6 md:px-12 bg-slate-950 text-white border-y border-white/5">
-          <div className="max-w-[1400px] mx-auto">
-            <div className="text-center mb-24 reveal">
-              <QuoteIcon size={48} className="text-[#CC0000]/40 mx-auto mb-6" />
-              {/* INCREASED HEADER SIZE */}
-              <h2 className="text-5xl md:text-7xl font-heading text-white tracking-tighter uppercase mb-4">Client <span className="text-[#CC0000]">Voices</span></h2>
-              <p className="text-slate-400 uppercase font-black text-[10px] tracking-[0.4em]">Excellence verified by your neighbors</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {testimonials.map((t, i) => (
-                <div key={i} className="bg-slate-900 p-12 shadow-2xl rounded-sm border-t-4 border-[#CC0000] reveal hover:-translate-y-2 transition-transform duration-500 text-left" style={{ animationDelay: `${i * 0.1}s` }}>
-                  <div className="flex space-x-1 mb-8">
-                    {[...Array(t.rating)].map((_, index) => <Star key={index} size={14} className="text-[#CC0000] fill-[#CC0000]" />)}
-                  </div>
-                  <p className="text-lg text-slate-300 italic mb-10 leading-relaxed">"{t.text}"</p>
-                  <div className="flex items-center space-x-4 border-t border-white/5 pt-8">
-                    <div className="w-10 h-10 bg-[#CC0000] flex items-center justify-center text-white text-xs font-black rounded-full uppercase">{t.name[0]}</div>
-                    <div><p className="text-sm font-black text-white uppercase tracking-tight">{t.name}</p><p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{t.location}</p></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* INSTANT QUOTE CTA */}
-        <section className="py-40 px-6 md:px-12 bg-white text-center reveal">
-          <Sparkles size={64} className="text-[#CC0000] mx-auto mb-10 animate-pulse" />
-          {/* INCREASED HEADER SIZE */}
-          <h2 className="text-5xl lg:text-8xl font-heading text-slate-900 tracking-tighter uppercase mb-8 leading-none">Tailored <span className="text-[#CC0000]">Estimate</span></h2>
-          <p className="text-xl text-slate-500 font-light mb-16 max-w-2xl mx-auto">Launch our dispatch engine for a personalized service quote for your Peninsula property.</p>
-          <button onClick={() => setIsQuoteModalOpen(true)} className="bg-slate-950 text-white px-16 py-8 text-[11px] font-black uppercase tracking-[0.8em] hover:bg-[#CC0000] transition-all shadow-xl group overflow-hidden">
-            Open Quote Tool <ChevronRight className="inline-block ml-4 group-hover:translate-x-2 transition-transform" />
-          </button>
-        </section>
-
-        {/* SERVICE AREAS SECTION */}
-        <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white reveal">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-             <div className="text-left">
-                {/* INCREASED HEADER SIZE */}
-                <h2 className="text-5xl md:text-7xl font-heading tracking-tighter leading-none uppercase text-white mb-10">Service <span className="text-[#CC0000]">Areas</span></h2>
-                <img src={`/images/${IMAGE_MAP.SERVICE_AREA_MAP}`} alt="AWC Service Map" width="1200" height="800" loading="lazy" className="w-full h-auto shadow-2xl border border-white/10 rounded-sm" />
-             </div>
-             <div className="grid grid-cols-2 gap-y-4 gap-x-10 text-left">
-                {serviceLocations.map((location) => (
-                   <div key={location} className="flex items-center space-x-5 border-b border-white/5 pb-3 group hover:border-[#CC0000] transition-colors">
-                      <div className="w-2 h-2 bg-[#CC0000] rounded-full scale-0 group-hover:scale-100 transition-all"></div>
-                      <span className="text-xl md:text-2xl font-heading italic text-white/60 group-hover:text-white leading-none tracking-tight">{location}</span>
-                   </div>
-                ))}
-             </div>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer id="contact" className="bg-[#0A0B10] text-white py-20 px-12 border-t border-white/5 relative z-10">
-          <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
-            <div className="flex flex-col items-start max-w-sm text-left">
-               <img src={`/images/${IMAGE_MAP.LOGO}`} alt="AWC Footer Logo" width="150" height="150" className="h-14 brightness-200 grayscale mb-10 opacity-60 hover:opacity-100 transition-opacity" />
-               <p className="text-lg font-heading italic text-slate-400 leading-relaxed mb-8">"Clear views and fresh environments since 1946. Three generations of Frediani heritage in the Bay Area."</p>
-            </div>
-            <div className="flex flex-col space-y-10 text-left">
-               <nav className="grid grid-cols-2 gap-x-20 gap-y-5 text-[12px] font-black uppercase tracking-[0.3em] text-white/60">
-                  <a href="#services" className="hover:text-[#CC0000] transition-colors">Services</a>
-                  <a href="#heritage" className="hover:text-[#CC0000] transition-colors">Heritage</a>
-                  <a href="#about" className="hover:text-[#CC0000] transition-colors">Authority</a>
-                  <a href="#areas" className="hover:text-[#CC0000] transition-colors">Areas</a>
-               </nav>
-               <div className="h-px w-full bg-white/5"></div>
-               <a href={`tel:${phoneLiteral.replace(/\D/g,'')}`} className="text-3xl lg:text-5xl font-heading font-black text-white hover:text-[#CC0000] transition-all tracking-tighter leading-none" aria-label={`Call us at ${phoneLiteral}`}>{phoneLiteral}</a>
-            </div>
-            <div className="flex items-center space-x-6">
-              {['Licensed', 'Bonded', 'Insured'].map(tag => (
-                <div key={tag} className="px-5 py-2 border border-white/10 bg-white/5 text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 cursor-default">{tag}</div>
-              ))}
-            </div>
-          </div>
-        </footer>
+          <Footer imageMap={IMAGE_MAP} phoneLiteral={phoneLiteral} />
+        </Suspense>
       </main>
 
       {/* INSTANT QUOTE MODAL */}
