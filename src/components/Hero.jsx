@@ -26,6 +26,7 @@ export default function Hero({ imageMap }) {
                 src={`/images/${imageMap.HERO_LOGO_SVG}`} 
                 alt="AWC Hero Logo SVG" 
                 width="320" height="320"
+                fetchpriority="high" loading="eager" decoding="async"
                 className="h-56 md:h-[320px] w-auto mb-1 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in transition-transform duration-700 group-hover/brand:scale-105" 
             />
             <p className="text-white text-lg md:text-2xl font-heading font-black tracking-[0.2em] uppercase mb-4 drop-shadow-lg">

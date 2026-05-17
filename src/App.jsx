@@ -4,7 +4,8 @@ import {
 } from 'lucide-react';
 
 import Hero from './components/Hero.jsx';
-import { SocialSVG, IMAGE_MAP, phoneLiteral, socialLinks } from './constants.jsx';
+import { IMAGE_MAP, phoneLiteral } from './constants.jsx';
+import ScrollProgressBar from './components/ScrollProgressBar.jsx';
 
 const Services = lazy(() => import('./components/Services.jsx'));
 const Heritage = lazy(() => import('./components/Heritage.jsx'));
@@ -16,62 +17,7 @@ const Areas = lazy(() => import('./components/Areas.jsx'));
 const Footer = lazy(() => import('./components/Footer.jsx'));
 const QuoteModal = lazy(() => import('./components/QuoteModal.jsx'));
 const ServiceModal = lazy(() => import('./components/ServiceModal.jsx'));
-
-/**
- * AWC Air Duct and Window Cleaning - Production V89 (Typography Expansion)
- * Identity: 1946 Heritage / Frediani Family Lineage
- * Features: Larger Section Headings, Massive Hero Logo, Restored Meta SEO, PageSpeed Optimized
- */
-
-const FloatingSocials = ({ links }) => {
-  if (!links) return null;
-  return (
-    <div className="fixed bottom-10 left-10 z-[100] flex flex-col space-y-4">
-      {[
-        { id: 'instagram', icon: SocialSVG.Instagram, href: links.instagram, label: 'Instagram' },
-        { id: 'facebook', icon: SocialSVG.Facebook, href: links.facebook, label: 'Facebook' },
-        { id: 'tiktok', icon: SocialSVG.TikTok, href: links.tiktok, label: 'TikTok' },
-        { id: 'x', icon: SocialSVG.X, href: links.x, label: 'X' },
-        { id: 'yelp', icon: SocialSVG.Yelp, href: links.yelp, label: 'Yelp' },
-        { id: 'nextdoor', icon: SocialSVG.Nextdoor, href: links.nextdoor, label: 'Nextdoor' }
-      ].map((item) => {
-        const Icon = item.icon;
-        return (
-          <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center">
-            <div className="w-11 h-11 bg-white/90 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-300 group-hover:bg-[#CC0000] group-hover:text-white group-hover:border-[#CC0000] group-hover:scale-110 shadow-xl rounded-full relative">
-              <div className="absolute inset-0 rounded-full group-hover:animate-ping bg-[#CC0000]/20 opacity-0 group-hover:opacity-100"></div>
-              <Icon />
-            </div>
-            <span className="opacity-0 group-hover:opacity-100 ml-4 text-[9px] font-black uppercase tracking-[0.2em] text-white bg-slate-900 px-3 py-1.5 shadow-sm rounded-sm transition-all transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap">{item.label}</span>
-          </a>
-        );
-      })}
-    </div>
-  );
-};
-
-const ScrollProgressBar = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-          const currentProgress = (window.pageYOffset / totalScroll) * 100;
-          setScrollProgress(currentProgress);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return <div className="fixed top-0 left-0 h-1 bg-[#CC0000] z-[100]" style={{ width: `${scrollProgress}%` }}></div>;
-};
+const FloatingSocials = lazy(() => import('./components/FloatingSocials.jsx'));
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,7 +40,9 @@ export default function App() {
     <div className="bg-white text-slate-900 font-sans selection:bg-[#CC0000] selection:text-white overflow-x-hidden min-h-screen">
       <ScrollProgressBar />
       
-      <FloatingSocials links={socialLinks} />
+      <Suspense fallback={null}>
+        <FloatingSocials />
+      </Suspense>
 
       <header className="bg-white/95 backdrop-blur-xl border-b border-slate-100 fixed top-0 left-0 right-0 z-[60] shadow-sm transition-all duration-300">
         <div className="max-w-[1600px] mx-auto px-10 py-4 flex justify-between items-center">
@@ -103,6 +51,7 @@ export default function App() {
                src={`/images/${IMAGE_MAP.LOGO}`} 
                alt="AWC Header Logo" 
                width="176" height="176"
+               fetchpriority="high" loading="eager" decoding="async"
                className="h-44 w-auto cursor-pointer transition-transform hover:scale-110 absolute left-0 top-[68%] -translate-y-1/2" 
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
              />
