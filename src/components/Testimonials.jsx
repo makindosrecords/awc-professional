@@ -1,7 +1,8 @@
 import React from 'react';
 import { Quote as QuoteIcon, Star } from 'lucide-react';
+import { testimonials } from '../constants.jsx';
 
-export default function Testimonials({ testimonials }) {
+export default function Testimonials() {
   return (
     <section id="testimonials" className="py-32 px-6 md:px-12 bg-slate-950 text-white border-y border-white/5">
       <div className="max-w-[1400px] mx-auto">

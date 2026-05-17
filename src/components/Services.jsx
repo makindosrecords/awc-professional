@@ -1,7 +1,8 @@
 import React from 'react';
 import { Award } from 'lucide-react';
+import { services } from '../constants.jsx';
 
-export default function Services({ services, setSelectedService }) {
+export default function Services({ setSelectedService }) {
   return (
     <section id="services" className="py-32 px-12 bg-white relative border-y border-slate-100">
       <div className="max-w-[1500px] mx-auto">

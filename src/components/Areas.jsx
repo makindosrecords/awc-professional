@@ -1,6 +1,7 @@
 import React from 'react';
+import { serviceLocations } from '../constants.jsx';
 
-export default function Areas({ imageMap, serviceLocations }) {
+export default function Areas({ imageMap }) {
   return (
     <section id="areas" className="py-40 px-6 md:px-12 bg-slate-950 text-white reveal">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
