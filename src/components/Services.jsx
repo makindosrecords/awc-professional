@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award } from 'lucide-react';
-import { services } from '../constants.jsx';
+import { services } from '../servicesData.jsx';
 
 export default function Services({ setSelectedService }) {
   return (

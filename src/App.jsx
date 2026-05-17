@@ -1,7 +1,4 @@
 import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-import { 
-  Menu, X
-} from 'lucide-react';
 
 import Hero from './components/Hero.jsx';
 import { IMAGE_MAP, phoneLiteral } from './constants.jsx';
@@ -72,7 +69,9 @@ export default function App() {
               <span className="text-2xl text-slate-900 font-black tracking-tighter">{phoneLiteral}</span>
             </div>
           </nav>
-          <button className="xl:hidden p-2" onClick={() => setIsMenuOpen(true)} aria-label="Open Menu"><Menu size={32} /></button>
+          <button className="xl:hidden p-2" onClick={() => setIsMenuOpen(true)} aria-label="Open Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
         </div>
       </header>
 
@@ -108,7 +107,9 @@ export default function App() {
       {/* MOBILE NAV */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-slate-950 z-[200] flex flex-col items-center justify-center p-20 text-center animate-in fade-in duration-300">
-          <button className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" onClick={() => setIsMenuOpen(false)} aria-label="Close Menu"><X size={56} strokeWidth={1} /></button>
+          <button className="absolute top-12 right-12 text-white hover:text-[#CC0000] transition-all" onClick={() => setIsMenuOpen(false)} aria-label="Close Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
           <div className="space-y-8">
             {['Services', 'Heritage', 'About', 'Areas'].map(link => (
               <a key={link} href={`#${link.toLowerCase()}`} className="block text-5xl font-heading italic text-white hover:text-[#CC0000] tracking-tighter transition-all" onClick={() => setIsMenuOpen(false)}>{link}</a>

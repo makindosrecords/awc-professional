@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, FileText, Home, Briefcase, MapPin, CheckCircle, ChevronRight } from 'lucide-react';
-import { services } from '../constants.jsx';
+import { services } from '../servicesData.jsx';
 
 export default function QuoteModal({ setIsQuoteModalOpen }) {
   const [quoteStep, setQuoteStep] = useState(1);
