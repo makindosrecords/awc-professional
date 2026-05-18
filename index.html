@@ -29,10 +29,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div id="root">
-      <!-- Instant LCP Placeholder: Eliminates the 2,000ms React boot delay -->
-      <img src="/images/office_depot_window_cleaning.avif" alt="Window Cleaning LCP" fetchpriority="high" decoding="sync" style="position: absolute; top: 0; left: 0; width: 100%; height: 100vh; object-fit: cover; opacity: 0.9; z-index: -1;">
-    </div>
+    <!-- Instant LCP Placeholder: Moved OUTSIDE #root so React doesn't delete it -->
+    <img src="/images/office_depot_window_cleaning.avif" alt="Window Cleaning LCP" fetchpriority="high" decoding="sync" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; opacity: 0.9; z-index: -1; pointer-events: none;">
+    
+    <div id="root"></div>
+    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
