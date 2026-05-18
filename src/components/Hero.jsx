@@ -4,9 +4,15 @@ export default function Hero({ imageMap }) {
   const [mountVideo, setMountVideo] = useState(false);
 
   useEffect(() => {
-    // Defer video decoding by 150ms to prioritize the LCP image paint
-    const timer = setTimeout(() => setMountVideo(true), 150);
-    return () => clearTimeout(timer);
+    // Wait until the entire page (and LCP image) has fully loaded and painted
+    const handleLoad = () => setTimeout(() => setMountVideo(true), 250);
+    
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
   }, []);
 
   return (
@@ -16,7 +22,7 @@ export default function Hero({ imageMap }) {
           src={`/images/${imageMap.HERO_POSTER}`}
           alt="Professional window cleaning services in the Bay Area"
           fetchPriority="high"
-          decoding="sync"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
         />
         {mountVideo && (
@@ -34,14 +40,14 @@ export default function Hero({ imageMap }) {
         <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110 z-10"></div>
       </div>
 
-      <div className="relative z-20 max-w-[1700px] mx-auto w-full py-4 reveal">
+      <div className="relative z-20 max-w-[1700px] mx-auto w-full py-4">
         <div className="mb-6 flex flex-col items-center text-center group/brand">
             <img 
                 src={`/images/${imageMap.HERO_LOGO_SVG}`} 
                 alt="AWC Hero Logo SVG" 
                 width="320" height="320"
                 loading="eager" decoding="async"
-                className="h-56 md:h-[320px] w-auto mb-1 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] animate-in fade-in transition-transform duration-700 group-hover/brand:scale-105" 
+                className="h-56 md:h-[320px] w-auto mb-1 drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover/brand:scale-105" 
             />
             <p className="text-white text-lg md:text-2xl font-heading font-black tracking-[0.2em] uppercase mb-4 drop-shadow-lg">
                 Air Duct & Window Cleaning
