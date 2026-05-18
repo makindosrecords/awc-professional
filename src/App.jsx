@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-
 import Hero from './components/Hero.jsx';
 import { IMAGE_MAP, phoneLiteral } from './constants.jsx';
 import ScrollProgressBar from './components/ScrollProgressBar.jsx';
@@ -36,7 +35,7 @@ export default function App() {
                src={`/images/${IMAGE_MAP.LOGO}`} 
                alt="AWC Header Logo" 
                width="176" height="176"
-               fetchpriority="high" loading="eager" decoding="async"
+               loading="eager" decoding="async"
                className="h-44 w-auto cursor-pointer transition-transform hover:scale-110 absolute left-0 top-[68%] -translate-y-1/2" 
                onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
              />
