@@ -118,13 +118,13 @@ export default function App() {
         .font-heading { font-family: 'Archivo', sans-serif; font-display: swap; }
         body { background-color: #FFFFFF; }
         @keyframes reveal {
-          from { opacity: 1; transform: translateY(30px); }
+          from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .reveal {
           animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        @keyframes fade-in { from { opacity: 1; } to { opacity: 1; } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
         .animate-in { animation: fade-in 1.2s forwards; }
       `}} />
     </div>
