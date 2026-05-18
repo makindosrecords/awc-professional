@@ -3,18 +3,24 @@ import React from 'react';
 export default function Hero({ imageMap }) {
   return (
     <section className="relative min-h-[90vh] flex items-center bg-slate-950 overflow-hidden px-6 md:px-12 group">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-slate-950">
+        <img 
+          src={`/images/${imageMap.HERO_POSTER}`}
+          alt="Window Cleaning Background"
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+        />
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
         >
           <source src={`/images/${imageMap.HERO_VIDEO}`} type="video/mp4" />
           <track kind="captions" />
         </video>
-        <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110"></div>
+        <div className="absolute inset-0 bg-slate-950/10 backdrop-brightness-110 z-10"></div>
       </div>
 
       <div className="relative z-20 max-w-[1700px] mx-auto w-full py-4 reveal">
