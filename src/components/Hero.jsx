@@ -6,7 +6,7 @@ export default function Hero({ imageMap }) {
       <div className="absolute inset-0 z-0 bg-slate-950">
         <img 
           src={`/images/${imageMap.HERO_POSTER}`}
-          alt="Window Cleaning Background"
+          alt="Professional window cleaning services in the Bay Area"
           fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
         />

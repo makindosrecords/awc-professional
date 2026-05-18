@@ -7,7 +7,7 @@ export default function Authority({ imageMap }) {
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
           <div className="space-y-12 reveal text-left">
-            <h3 className="text-5xl lg:text-7xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h3>
+            <h2 className="text-5xl lg:text-7xl font-heading text-[#CC0000] tracking-tighter uppercase leading-none">Authority</h2>
             <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light font-sans max-w-lg">
               We are proud to be active participants in the <strong>International Window Cleaning Association</strong>. Our crew holds full certifications in OSHA protocols and aerial platform systems.
             </p>
