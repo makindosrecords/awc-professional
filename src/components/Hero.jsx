@@ -9,8 +9,6 @@ export default function Hero({ imageMap }) {
           muted
           loop
           playsInline
-          fetchpriority="high"
-          poster={`/images/${imageMap.HERO_POSTER}`}
           className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
         >
           <source src={`/images/${imageMap.HERO_VIDEO}`} type="video/mp4" />
